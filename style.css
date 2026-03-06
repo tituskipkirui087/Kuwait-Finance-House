@@ -1360,6 +1360,17 @@ a {
     gap: 32px;
 }
 
+@media (max-width: 768px) {
+    .customer-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .customer-card {
+        padding: 20px;
+    }
+}
+
 .customer-card {
     background: var(--bg-light);
     padding: 32px;
