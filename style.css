@@ -1804,7 +1804,7 @@ a {
 
 @keyframes slideInSweet {
     0% {
-        transform: translateX(-150%) translateY(-50px) scale(0.7);
+        transform: translateX(150%) translateY(-30px) scale(0.7);
         opacity: 0;
     }
     100% {
