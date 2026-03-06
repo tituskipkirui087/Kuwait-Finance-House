@@ -1926,16 +1926,20 @@ a {
 @media (max-width: 768px) {
     /* Only move the Apply Now button down near calculator */
     .hero-buttons {
-        position: absolute;
-        bottom: -80px;
+        position: relative;
+        bottom: auto;
         left: 50%;
         transform: translateX(-50%);
+        margin-top: 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
     }
     
     /* Reduce Apply Now button size to match calculator buttons */
     .cta-button {
-        padding: 10px 20px;
-        font-size: 14px;
+        padding: 14px 32px;
+        font-size: 16px;
         border-radius: var(--radius-md);
     }
     
@@ -1947,10 +1951,10 @@ a {
         flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
-        padding: 14px 20px;
+        padding: 10px 16px;
         border-radius: 10px;
-        width: 90%;
-        margin-top: 120px;
+        width: 100%;
+        margin-top: 0;
         bottom: auto;
         left: auto;
         transform: none;
@@ -1958,12 +1962,12 @@ a {
     
     .stat {
         flex: 1 1 30%;
-        padding: 10px;
+        padding: 8px;
         border-right: none;
     }
     
     .stat-number {
-        font-size: 28px;
+        font-size: 18px;
     }
     
     .stat-label {
