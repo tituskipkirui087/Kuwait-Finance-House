@@ -1913,11 +1913,15 @@ a {
     }
     
     .cta-button {
-        padding: 14px 28px;
-        font-size: 16px;
-        border-radius: 30px;
+        padding: 18px 40px;
+        font-size: 20px;
+        border-radius: 35px;
         width: 100%;
+        max-width: 280px;
         justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
     }
     
     /* Features Section */
@@ -2054,8 +2058,15 @@ a {
     }
     
     .cta-button {
-        padding: 16px 36px;
-        font-size: 18px;
+        padding: 18px 40px;
+        font-size: 20px;
+        border-radius: 35px;
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
     }
     
     /* Features */
