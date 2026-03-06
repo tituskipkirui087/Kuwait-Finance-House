@@ -539,208 +539,51 @@
 }
 
 /* ========================================
-   Responsive Design
+   Responsive Design - Keep laptop style but scale for mobile
    ======================================== */
-
-/* Mobile styles - 480px and below (Android phones) */
-@media (max-width: 480px) {
-    .application-section {
-        padding: 100px 16px 40px;
-    }
-    
-    .application-container {
-        padding: 0 4px;
-    }
-    
-    .form-card {
-        padding: 24px 16px;
-        border-radius: 16px;
-    }
-    
-    .step-header {
-        margin-bottom: 24px;
-    }
-    
-    .step-header h2 {
-        font-size: 22px;
-    }
-    
-    .step-header p {
-        font-size: 14px;
-    }
-    
-    /* Progress Bar - simplify for mobile */
-    .progress-bar {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    
-    .progress-step {
-        flex-direction: row;
-        gap: 8px;
-    }
-    
-    .step-number {
-        width: 32px;
-        height: 32px;
-        font-size: 12px;
-    }
-    
-    .step-label {
-        font-size: 10px;
-    }
-    
-    .progress-line {
-        width: 20px;
-        margin-bottom: 20px;
-    }
-    
-    /* Form Groups */
-    .form-group {
-        margin-bottom: 18px;
-    }
-    
-    .form-group label {
-        font-size: 14px;
-    }
-    
-    .form-group input,
-    .form-group select {
-        padding: 12px 14px;
-        font-size: 15px;
-    }
-    
-    /* Phone Input */
-    .phone-wrapper {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .phone-prefix {
-        width: 100%;
-        text-align: center;
-        padding: 12px;
-    }
-    
-    .phone-input input {
-        width: 100%;
-    }
-    
-    /* Amount Selector */
-    .amount-selector {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-    
-    .amount-btn {
-        padding: 10px 6px;
-        font-size: 13px;
-    }
-    
-    /* Loan Summary */
-    .loan-summary-card {
-        padding: 16px;
-    }
-    
-    .summary-item {
-        padding: 10px 0;
-    }
-    
-    .summary-value {
-        font-size: 16px;
-    }
-    
-    .summary-item.highlight .summary-value {
-        font-size: 18px;
-    }
-    
-    /* Form Actions */
-    .form-actions {
-        flex-direction: column-reverse;
-        gap: 12px;
-    }
-    
-    .btn-secondary,
-    .btn-primary {
-        width: 100%;
-        max-width: none;
-        padding: 14px 20px;
-        font-size: 15px;
-    }
-    
-    /* Approval Notice */
-    .approval-notice {
-        padding: 12px;
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
-    }
-    
-    .approval-notice span {
-        font-size: 20px;
-    }
-    
-    /* OTP Notice */
-    .otp-notice {
-        padding: 16px;
-    }
-    
-    .otp-icon {
-        font-size: 28px;
-    }
-    
-    .otp-notice p {
-        font-size: 14px;
-    }
-    
-    /* PIN/OTP Input */
-    .pin-input,
-    .otp-input {
-        font-size: 18px !important;
-        letter-spacing: 6px !important;
-    }
-    
-    /* Success Message */
-    .success-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 30px;
-    }
-    
-    .success-message h2 {
-        font-size: 22px;
-    }
-    
-    .success-details {
-        padding: 16px;
-    }
-}
-
-/* Tablet styles - 768px */
 @media (max-width: 768px) {
+    /* Scale content to fit mobile while keeping laptop layout */
+    html {
+        font-size: 14px;
+    }
+    
+    .application-section {
+        padding: 100px 20px 40px;
+    }
+    
     .form-card {
-        padding: 28px 20px;
+        padding: 32px 24px;
     }
     
     .step-header h2 {
         font-size: 24px;
     }
     
+    /* Keep laptop-style progress bar */
+    .progress-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Keep laptop-style amount selector */
     .amount-selector {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
     
     .progress-line {
-        width: 30px;
+        width: 50px;
     }
     
+    /* Keep laptop-style form actions */
     .form-actions {
-        flex-direction: column-reverse;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
     }
     
     .btn-secondary,
     .btn-primary {
-        width: 100%;
-        max-width: none;
+        padding: 14px 28px;
     }
 }
