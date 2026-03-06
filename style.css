@@ -1495,11 +1495,15 @@ a {
     }
     
     .hero {
-        padding: 80px 16px 40px;
+        padding: 60px 12px 30px;
     }
     
     .hero-title {
-        font-size: 28px;
+        font-size: 24px;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
     }
     
     .hero-buttons {
@@ -1508,14 +1512,22 @@ a {
     }
     
     .cta-button {
-        padding: 14px 28px;
-        font-size: 16px;
+        padding: 12px 24px;
+        font-size: 14px;
     }
     
     .hero-stats {
         flex-wrap: wrap;
-        gap: 16px;
-        padding: 12px 16px;
+        gap: 12px;
+        padding: 10px 12px;
+    }
+    
+    .stat-value {
+        font-size: 18px;
+    }
+    
+    .stat-label {
+        font-size: 11px;
     }
     
     .features-grid,
@@ -1524,54 +1536,62 @@ a {
     }
     
     .features-section {
-        padding: 40px 16px;
+        padding: 30px 12px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
     }
     
     .customer-section {
-        padding: 40px 16px;
+        padding: 30px 12px;
     }
     
     .calculator-section {
-        padding: 40px 16px;
+        padding: 30px 12px;
     }
     
     .calculator-section .section-title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .calculator-card {
-        padding: 28px;
-        border-radius: 20px;
+        padding: 20px;
+        border-radius: 16px;
     }
     
     .calculator-inputs {
-        gap: 24px;
-    }
-    
-    .calc-group {
-        padding: 24px;
-    }
-    
-    .amount-display {
-        padding: 28px;
-    }
-    
-    .amount-display .amount-value {
-        font-size: 36px;
-    }
-    
-    .period-display {
-        padding: 24px;
-        font-size: 1.4rem;
-    }
-    
-    .calculator-results {
-        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
     
-    .result-card {
+    .calc-group {
+        padding: 16px;
+    }
+    
+    .amount-display {
         padding: 20px;
+    }
+    
+    .amount-display .amount-value {
+        font-size: 28px;
+    }
+    
+    .period-display {
+        padding: 16px;
+        font-size: 1.1rem;
+    }
+    
+    .calculator-results {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .result-card {
+        padding: 14px;
     }
     
     .result-card.highlight {
@@ -1579,11 +1599,11 @@ a {
     }
     
     .result-value {
-        font-size: 24px;
+        font-size: 18px;
     }
     
     .result-value.highlight {
-        font-size: 28px;
+        font-size: 22px;
     }
     
     .calculator-cta {
