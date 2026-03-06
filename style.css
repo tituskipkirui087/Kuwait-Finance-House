@@ -1449,6 +1449,7 @@ a {
     
     .hero {
         padding: 25px 10px 10px;
+        min-height: 50vh;
     }
     
     .hero-title {
