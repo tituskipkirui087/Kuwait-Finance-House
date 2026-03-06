@@ -1747,31 +1747,34 @@ a {
 
 @media (max-width: 480px) {
     .notification-container {
-        top: 20px;
-        right: 10px;
-        left: 10px;
+        top: 15px;
+        right: 8px;
+        left: 8px;
         max-width: none;
+        gap: 10px;
     }
     
     .notification-popup {
-        padding: 16px;
+        padding: 10px 12px;
+        border-radius: 12px;
     }
     
     .notification-icon {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
     }
     
     .notification-title {
-        font-size: 10px;
+        font-size: 9px;
     }
     
     .notification-name {
-        font-size: 16px;
+        font-size: 13px;
     }
     
     .notification-amount {
-        font-size: 14px;
+        font-size: 11px;
     }
 }
 
