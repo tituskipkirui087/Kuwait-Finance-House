@@ -411,7 +411,7 @@ a {
 
 /* Hamburger Menu */
 .hamburger {
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
@@ -422,7 +422,7 @@ a {
 .hamburger span {
     width: 25px;
     height: 3px;
-    background: white;
+    background: #000000;
     border-radius: 2px;
     transition: all 0.3s ease;
 }
