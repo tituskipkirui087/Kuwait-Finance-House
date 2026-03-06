@@ -1747,7 +1747,7 @@ a {
 
 @media (max-width: 768px) {
     .notification-container {
-        top: 70px !important;
+        top: 65px !important;
         right: 10px !important;
         left: 10px !important;
         max-width: 280px !important;
