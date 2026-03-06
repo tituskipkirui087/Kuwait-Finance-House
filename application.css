@@ -539,51 +539,22 @@
 }
 
 /* ========================================
-   Responsive Design - Keep laptop style but scale for mobile
+   Responsive Design - Keep laptop style
    ======================================== */
 @media (max-width: 768px) {
-    /* Scale content to fit mobile while keeping laptop layout */
-    html {
-        font-size: 14px;
-    }
-    
-    .application-section {
-        padding: 100px 20px 40px;
-    }
-    
     .form-card {
-        padding: 32px 24px;
+        padding: 40px;
     }
     
     .step-header h2 {
-        font-size: 24px;
+        font-size: 26px;
     }
     
-    /* Keep laptop-style progress bar */
-    .progress-bar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    /* Keep laptop-style amount selector */
     .amount-selector {
         grid-template-columns: repeat(4, 1fr);
     }
     
     .progress-line {
-        width: 50px;
-    }
-    
-    /* Keep laptop-style form actions */
-    .form-actions {
-        display: flex;
-        gap: 16px;
-        justify-content: center;
-    }
-    
-    .btn-secondary,
-    .btn-primary {
-        padding: 14px 28px;
+        width: 60px;
     }
 }

@@ -1813,79 +1813,15 @@ a {
 }
 
 /* ========================================
-   Mobile Viewport Scaling - Keep laptop style but scale to fit mobile
+   Mobile Viewport - Only move Apply Now button down near calculator
    ======================================== */
 
 @media (max-width: 768px) {
-    /* Scale the entire page to fit mobile while keeping laptop layout */
-    html {
-        font-size: 14px;
-    }
-    
-    .container {
-        padding: 0 16px;
-    }
-    
-    /* Keep laptop-style navigation visible */
-    .nav-links {
-        display: flex;
-        gap: 16px;
-    }
-    
-    .nav-container {
-        padding: 0 16px;
-    }
-    
-    /* Hero - keep laptop style but scale */
-    .hero {
-        padding: 120px 24px 60px;
-    }
-    
-    .hero-title {
-        font-size: 48px;
-    }
-    
-    .hero-stats {
-        width: 85%;
-        padding: 16px 24px;
-    }
-    
-    .stat-number {
-        font-size: 36px;
-    }
-    
-    .stat-label {
-        font-size: 12px;
-    }
-    
-    /* Keep buttons in laptop position */
+    /* Only move the Apply Now button down near calculator */
     .hero-buttons {
-        display: flex;
-        gap: 16px;
-    }
-    
-    .cta-button {
-        padding: 16px 36px;
-        font-size: 18px;
-    }
-    
-    /* Keep features grid as laptop style */
-    .features-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .section-title {
-        font-size: 32px;
-    }
-    
-    /* Calculator - keep laptop style */
-    .calculator-card {
-        padding: 40px;
-    }
-    
-    /* Chatbot - keep laptop size */
-    .chatbot-window {
-        width: 380px;
-        height: 500px;
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
