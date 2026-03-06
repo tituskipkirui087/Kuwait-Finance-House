@@ -1504,8 +1504,12 @@ a {
     }
     
     .hero-buttons {
-        left: 10px;
-        bottom: 10px;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
     }
     
     .cta-button {
@@ -1515,9 +1519,15 @@ a {
     }
     
     .hero-stats {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
         flex-wrap: wrap;
-        gap: 6px;
-        padding: 6px 8px;
+        gap: 8px;
+        padding: 10px 16px;
+        margin-bottom: 0;
     }
     
     .stat-value {
