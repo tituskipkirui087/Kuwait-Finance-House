@@ -1612,6 +1612,36 @@ a {
     max-width: 340px;
 }
 
+@media (max-width: 480px) {
+    .notification-container {
+        top: 20px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .notification-popup {
+        padding: 16px;
+    }
+    
+    .notification-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .notification-title {
+        font-size: 10px;
+    }
+    
+    .notification-name {
+        font-size: 16px;
+    }
+    
+    .notification-amount {
+        font-size: 14px;
+    }
+}
+
 .notification-popup {
     background: linear-gradient(145deg, #0d2d1a 0%, #0a1f12 50%, #071510 100%);
     color: white;
