@@ -8,6 +8,29 @@
     z-index: 9999;
 }
 
+@media (max-width: 768px) {
+    .chatbot-container {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .chatbot-toggle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .chatbot-float-msg {
+        right: 70px;
+        bottom: 15px;
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+    
+    .chatbot-float-msg::after {
+        border-left-width: 8px;
+    }
+}
+
 .chatbot-float-msg {
     position: absolute;
     right: 80px;
