@@ -1325,31 +1325,43 @@ a {
    Customer Previews Section
    ======================================== */
 .customer-section {
-    padding: 70px 20px;
-    background: linear-gradient(180deg, #f0f7f1 0%, #ffffff 100%);
+    padding: 80px 24px;
+    background: var(--bg-white);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    color: var(--text-gray);
 }
 
 .customer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
 }
 
 .customer-card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 8px 30px rgba(0, 145, 68, 0.12);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+    background: var(--bg-light);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: var(--transition);
 }
 
 .customer-card:hover {
-    transform: translateY(-5px);
-    border-color: #009144;
-    box-shadow: 0 15px 40px rgba(0, 145, 68, 0.2);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
 }
 
 .customer-avatar {
