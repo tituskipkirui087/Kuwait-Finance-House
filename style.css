@@ -1825,6 +1825,13 @@ a {
         transform: translateX(-50%);
     }
     
+    /* Reduce Apply Now button size to match calculator buttons */
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+    
     /* Make stats box rectangular on mobile - move below hero text */
     .hero-stats {
         position: relative;
