@@ -4,6 +4,16 @@
  */
 
 // ========================================
+// Mobile Menu Toggle
+// ========================================
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks) {
+        navLinks.classList.toggle('active');
+    }
+}
+
+// ========================================
 // Kuwaiti Names Database
 // ========================================
 const kuwaitiNames = {
