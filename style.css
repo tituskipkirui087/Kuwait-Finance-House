@@ -393,6 +393,15 @@ a {
     }
 }
 
+@keyframes buttonPulse {
+    0%, 100% {
+        box-shadow: 0 10px 30px rgba(0, 145, 68, 0.4), 0 0 20px rgba(0, 200, 83, 0.2);
+    }
+    50% {
+        box-shadow: 0 10px 40px rgba(0, 145, 68, 0.6), 0 0 35px rgba(0, 230, 118, 0.4);
+    }
+}
+
 .nav-cta:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
@@ -561,51 +570,74 @@ a {
 }
 
 .cta-button {
-    background: linear-gradient(135deg, #00c853, #00a043);
+    background: linear-gradient(135deg, #009144 0%, #00c853 50%, #00e676 100%);
     color: white;
     border: none;
-    padding: 20px 50px;
-    font-size: 22px;
-    font-weight: 700;
-    border-radius: 50px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 10px 30px rgba(0, 200, 83, 0.4);
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 145, 68, 0.3);
     position: relative;
     overflow: hidden;
+    animation: buttonPulse 2s ease-in-out infinite;
 }
 
 .cta-button::before {
     content: '';
     position: absolute;
     top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 50px;
-    padding: 3px;
-    background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #ff6b6b, #ffd93d, #6bcb77, #4d96ff);
-    background-size: 300% 300%;
+    border-radius: var(--radius-md);
+    padding: 2px;
+    background: linear-gradient(90deg, #009144, #00e676, #009144);
+    background-size: 200% 200%;
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: borderShine 2s linear infinite;
-    box-shadow: 0 0 15px rgba(77, 150, 255, 0.5);
+    animation: borderShine 3s linear infinite;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.5);
 }
 
 .cta-button:hover {
-    background: linear-gradient(135deg, #00a043, #008035);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0, 200, 83, 0.5);
+    background: linear-gradient(135deg, #00e676 0%, #00c853 50%, #009144 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 145, 68, 0.4);
+    animation: none;
+}
+
+.cta-button:hover::before {
+    left: 100%;
 }
 
 .cta-button .arrow {
     font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .arrow {
+    transform: translateX(5px);
 }
 
 .hero-image {
@@ -1829,7 +1861,7 @@ a {
     .cta-button {
         padding: 10px 20px;
         font-size: 14px;
-        border-radius: 10px;
+        border-radius: var(--radius-md);
     }
     
     /* Make stats box rectangular on mobile - move below hero text */
