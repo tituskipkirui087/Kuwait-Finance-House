@@ -1839,9 +1839,10 @@ a {
     /* Hero Section - major fixes */
     .hero {
         padding: 100px 16px 40px;
-        min-height: auto;
-        height: auto;
-        display: block;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 20px;
     }
     
     .hero::before {
@@ -1851,11 +1852,12 @@ a {
     .hero-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-        min-height: auto;
+        min-height: 100%;
         padding-bottom: 0;
         text-align: center;
+        width: 100%;
     }
     
     .hero-content {
@@ -1875,17 +1877,17 @@ a {
         white-space: normal;
     }
     
-    /* Hero Stats - reposition for mobile */
+    /* Hero Stats - keep original position */
     .hero-stats {
         flex-direction: row;
         gap: 8px;
         padding: 12px;
         width: 100%;
-        position: relative;
-        bottom: auto;
-        left: auto;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
         transform: none;
-        margin-bottom: 20px;
+        margin-bottom: 0;
     }
     
     .stat {
@@ -1902,17 +1904,17 @@ a {
         font-size: 9px;
     }
     
-    /* Hero Buttons - reposition for mobile */
+    /* Hero Buttons - move to bottom near calculator */
     .hero-buttons {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
+        position: absolute;
+        bottom: 180px;
+        left: 50%;
+        transform: translateX(-50%);
         flex-direction: column;
         width: 100%;
         max-width: 320px;
-        margin: 30px auto 0;
         padding: 0 16px;
+        z-index: 20;
     }
     
     .cta-button {
@@ -2035,6 +2037,10 @@ a {
     /* Hero Section */
     .hero {
         padding: 110px 20px 50px;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 20px;
     }
     
     .hero-title {
@@ -2044,6 +2050,9 @@ a {
     .hero-stats {
         width: 90%;
         padding: 14px 18px;
+        position: absolute;
+        bottom: 20px;
+        left: 5%;
     }
     
     .stat-number {
@@ -2055,9 +2064,8 @@ a {
     }
     
     .hero-buttons {
-        top: auto;
+        bottom: 200px;
         max-width: 400px;
-        margin: 30px auto 0;
         padding: 0 20px;
     }
     
