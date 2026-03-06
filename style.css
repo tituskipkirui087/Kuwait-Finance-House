@@ -1824,4 +1824,30 @@ a {
         left: 50%;
         transform: translateX(-50%);
     }
+    
+    /* Make stats box rectangular on mobile */
+    .hero-stats {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 20px 30px;
+        border-radius: 12px;
+        width: 90%;
+    }
+    
+    .stat {
+        flex: 1 1 30%;
+        padding: 10px;
+        border-right: none;
+    }
+    
+    .stat-number {
+        font-size: 28px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
 }
