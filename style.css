@@ -1910,6 +1910,9 @@ a {
         transform: none;
         flex-direction: column;
         width: 100%;
+        max-width: 320px;
+        margin: 30px auto 0;
+        padding: 0 16px;
     }
     
     .cta-button {
@@ -1917,10 +1920,8 @@ a {
         font-size: 20px;
         border-radius: 35px;
         width: 100%;
-        max-width: 280px;
         justify-content: center;
         text-align: center;
-        margin: 30px auto 0;
         display: flex;
     }
     
@@ -2055,6 +2056,9 @@ a {
     
     .hero-buttons {
         top: auto;
+        max-width: 400px;
+        margin: 30px auto 0;
+        padding: 0 20px;
     }
     
     .cta-button {
@@ -2062,10 +2066,8 @@ a {
         font-size: 20px;
         border-radius: 35px;
         width: 100%;
-        max-width: 300px;
         justify-content: center;
         text-align: center;
-        margin: 30px auto 0;
         display: flex;
     }
     
