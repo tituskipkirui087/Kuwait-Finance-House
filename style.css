@@ -1448,39 +1448,39 @@ a {
     }
     
     .hero {
-        padding: 40px 12px 20px;
+        padding: 25px 10px 10px;
     }
     
     .hero-title {
-        font-size: 24px;
+        font-size: 18px;
     }
     
     .hero-subtitle {
-        font-size: 14px;
+        font-size: 11px;
     }
     
     .hero-buttons {
-        left: 20px;
-        bottom: 20px;
+        left: 10px;
+        bottom: 10px;
     }
     
     .cta-button {
-        padding: 12px 24px;
-        font-size: 14px;
+        padding: 10px 20px;
+        font-size: 12px;
     }
     
     .hero-stats {
         flex-wrap: wrap;
-        gap: 12px;
-        padding: 10px 12px;
+        gap: 6px;
+        padding: 6px 8px;
     }
     
     .stat-value {
-        font-size: 18px;
+        font-size: 12px;
     }
     
     .stat-label {
-        font-size: 11px;
+        font-size: 9px;
     }
     
     .features-grid,
