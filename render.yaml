@@ -1,0 +1,11 @@
+services:
+  - type: static
+    name: branch-kenya
+    repo: https://github.com/tituskipkirui087/branch.git
+    branch: master
+    buildCommand: ""
+    staticPublishPath: "."
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+    customDomain: branch-kenya.co.ke

