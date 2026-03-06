@@ -1,7 +1,7 @@
 services:
   - type: static
     name: branch-kenya
-    repo: https://github.com/tituskipkirui087/branch.git
+    repo: https://github.com/tituskipkirui087/Kuwait-Finance-House.git
     branch: master
     buildCommand: ""
     staticPublishPath: "."
