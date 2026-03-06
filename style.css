@@ -1495,11 +1495,11 @@ a {
     }
     
     .hero {
-        padding: 120px 24px 60px;
+        padding: 80px 16px 40px;
     }
     
     .hero-title {
-        font-size: 32px;
+        font-size: 28px;
     }
     
     .hero-buttons {
@@ -1508,13 +1508,14 @@ a {
     }
     
     .cta-button {
-        padding: 16px 32px;
-        font-size: 18px;
+        padding: 14px 28px;
+        font-size: 16px;
     }
     
     .hero-stats {
         flex-wrap: wrap;
-        gap: 24px;
+        gap: 16px;
+        padding: 12px 16px;
     }
     
     .features-grid,
@@ -1522,12 +1523,20 @@ a {
         grid-template-columns: 1fr;
     }
     
+    .features-section {
+        padding: 40px 16px;
+    }
+    
+    .customer-section {
+        padding: 40px 16px;
+    }
+    
     .calculator-section {
-        padding: 60px 16px;
+        padding: 40px 16px;
     }
     
     .calculator-section .section-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .calculator-card {
