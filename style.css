@@ -1920,7 +1920,7 @@ a {
         max-width: 280px;
         justify-content: center;
         text-align: center;
-        margin: 0 auto;
+        margin: 30px auto 0;
         display: flex;
     }
     
@@ -2065,7 +2065,7 @@ a {
         max-width: 300px;
         justify-content: center;
         text-align: center;
-        margin: 0 auto;
+        margin: 30px auto 0;
         display: flex;
     }
     
