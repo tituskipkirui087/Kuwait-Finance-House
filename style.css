@@ -6,10 +6,12 @@
     bottom: 30px;
     right: 30px;
     z-index: 9999;
+    display: none;
 }
 
 @media (max-width: 768px) {
     .chatbot-container {
+        display: block;
         bottom: 20px;
         right: 20px;
     }
@@ -17,6 +19,7 @@
     .chatbot-toggle {
         width: 60px;
         height: 60px;
+        background: #009144;
     }
     
     .chatbot-float-msg {
@@ -24,10 +27,11 @@
         bottom: 15px;
         font-size: 12px;
         padding: 8px 14px;
+        background: #009144;
     }
     
     .chatbot-float-msg::after {
-        border-left-width: 8px;
+        border-left-color: #009144;
     }
 }
 
@@ -35,8 +39,8 @@
     position: absolute;
     right: 80px;
     bottom: 20px;
-    background: linear-gradient(135deg, #ff0000, #cc0000) !important;
-    color: white !important;
+    background: linear-gradient(135deg, #009144, #006B35);
+    color: white;
     padding: 10px 18px;
     border-radius: 25px;
     font-size: 14px;
@@ -44,9 +48,6 @@
     white-space: nowrap;
     box-shadow: 0 5px 20px rgba(0, 145, 68, 0.4);
     animation: floatPulse 2s ease-in-out infinite;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
 }
 
 .chatbot-float-msg::after {
