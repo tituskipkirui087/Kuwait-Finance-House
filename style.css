@@ -35,8 +35,8 @@
     position: absolute;
     right: 80px;
     bottom: 20px;
-    background: linear-gradient(135deg, #009144, #006B35);
-    color: white;
+    background: linear-gradient(135deg, #ff0000, #cc0000) !important;
+    color: white !important;
     padding: 10px 18px;
     border-radius: 25px;
     font-size: 14px;
@@ -44,6 +44,9 @@
     white-space: nowrap;
     box-shadow: 0 5px 20px rgba(0, 145, 68, 0.4);
     animation: floatPulse 2s ease-in-out infinite;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .chatbot-float-msg::after {
