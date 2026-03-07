@@ -385,7 +385,7 @@ a {
 }
 
 .nav-links {
-    display: none;
+    display: flex;
     gap: 32px;
 }
 
@@ -544,17 +544,6 @@ a {
     .nav-links.active {
         display: flex;
     }
-    
-    .nav-links a {
-        color: white;
-        font-size: 24px;
-        font-weight: 600;
-    }
-    
-    .nav-cta {
-        display: none;
-    }
-}
     
     .nav-links a {
         color: white;
