@@ -1515,12 +1515,20 @@ a {
 
 @media (max-width: 768px) {
     .customer-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 16px !important;
+        padding: 0 16px !important;
+        -webkit-overflow-scrolling: touch !important;
     }
     
     .customer-card {
-        padding: 24px;
+        min-width: 85vw !important;
+        max-width: 85vw !important;
+        flex-shrink: 0 !important;
+        scroll-snap-align: center !important;
     }
 }
 
