@@ -73,7 +73,7 @@
 }
 
 /* Mobile styles for chatbot */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .chatbot-container {
         bottom: 20px !important;
         right: 20px !important;
