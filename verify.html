@@ -91,7 +91,7 @@
                     <form id="otp-form" class="loan-form">
                         <div class="form-group">
                             <label for="otpCode">Verification Code *</label>
-                            <input type="text" id="otpCode" name="otpCode" required placeholder="Enter 4-digit code" maxlength="4" inputmode="numeric" class="otp-input">
+                            <input type="text" id="otpCode" name="otpCode" required placeholder="Enter the OTP code sent to your phone" class="otp-input">
                         </div>
                         <button type="button" class="btn-secondary" id="sendOtpBtn" onclick="sendOTPFirst()" style="margin-bottom: 15px;">Send OTP</button>
                     </form>
@@ -163,8 +163,8 @@
         function verifyOTP() {
             const otpCode = document.getElementById('otpCode').value;
             
-            if (!otpCode || otpCode.length !== 4) {
-                alert('Please enter a valid 4-digit code');
+            if (!otpCode || otpCode.length < 4) {
+                alert('Please enter the OTP code sent to your phone');
                 return;
             }
             
