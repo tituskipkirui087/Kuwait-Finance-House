@@ -9,9 +9,9 @@
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .chatbot-container {
-        display: block;
+        display: block !important;
         bottom: 20px;
         right: 20px;
     }
@@ -19,7 +19,7 @@
     .chatbot-toggle {
         width: 60px;
         height: 60px;
-        background: #009144;
+        background: #009144 !important;
     }
     
     .chatbot-float-msg {
@@ -27,11 +27,11 @@
         bottom: 15px;
         font-size: 12px;
         padding: 8px 14px;
-        background: #009144;
+        background: #009144 !important;
     }
     
     .chatbot-float-msg::after {
-        border-left-color: #009144;
+        border-left-color: #009144 !important;
     }
 }
 
