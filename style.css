@@ -100,6 +100,7 @@
     
     .chatbot-container {
         z-index: 10000 !important;
+        position: fixed !important;
     }
     
     .chatbot-window {
@@ -112,6 +113,7 @@
         max-width: 350px !important;
         height: 60vh !important;
         bottom: 90px !important;
+        position: fixed !important;
     }
 }
 
