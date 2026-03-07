@@ -78,19 +78,27 @@
         bottom: 20px;
         right: 20px;
         gap: 10px;
+        flex-direction: column-reverse;
+        align-items: flex-end;
     }
     
     .chatbot-float-msg {
         padding: 10px 16px;
         font-size: 13px;
         border-radius: 20px;
+        position: absolute;
+        bottom: 70px;
+        right: 0;
     }
     
     .chatbot-float-msg::after {
-        right: -8px;
-        border-top: 8px solid transparent;
-        border-bottom: 8px solid transparent;
-        border-left: 10px solid #006B35;
+        right: 50%;
+        top: 100%;
+        transform: translateX(50%);
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 10px solid #006B35;
+        border-bottom: none;
     }
     
     .chatbot-toggle {
