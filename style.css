@@ -140,6 +140,18 @@
     overflow: hidden;
 }
 
+/* Mobile chatbot window */
+@media (max-width: 768px) {
+    .chatbot-window {
+        width: calc(100vw - 20px) !important;
+        max-width: 350px !important;
+        height: 400px !important;
+        bottom: 80px !important;
+        right: 5px !important;
+        border-radius: 15px !important;
+    }
+}
+
 .chatbot-window.active {
     display: flex;
 }
