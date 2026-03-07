@@ -83,6 +83,31 @@
     gap: 15px;
 }
 
+/* Make chatbot clickable on mobile */
+@media (max-width: 768px) {
+    .chatbot-toggle {
+        cursor: pointer !important;
+        pointer-events: auto !important;
+        z-index: 10001 !important;
+    }
+    
+    .chatbot-container {
+        z-index: 10000 !important;
+    }
+    
+    .chatbot-window {
+        display: none;
+    }
+    
+    .chatbot-window.active {
+        display: flex !important;
+        width: 90vw !important;
+        max-width: 350px !important;
+        height: 60vh !important;
+        bottom: 90px !important;
+    }
+}
+
 .chatbot-window {
     position: absolute;
     bottom: 90px;
