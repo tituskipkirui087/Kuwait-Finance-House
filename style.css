@@ -1520,8 +1520,30 @@ a {
         overflow-x: auto !important;
         scroll-snap-type: x mandatory !important;
         gap: 16px !important;
-        padding: 0 16px !important;
+        padding: 0 40px !important;
         -webkit-overflow-scrolling: touch !important;
+        position: relative !important;
+    }
+    
+    .customer-grid::before,
+    .customer-grid::after {
+        content: '◀' !important;
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        font-size: 20px !important;
+        color: #009144 !important;
+        z-index: 10 !important;
+        pointer-events: none !important;
+    }
+    
+    .customer-grid::before {
+        left: 10px !important;
+    }
+    
+    .customer-grid::after {
+        content: '▶' !important;
+        right: 10px !important;
     }
     
     .customer-card {
