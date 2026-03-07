@@ -86,9 +86,16 @@
 /* Make chatbot clickable on mobile */
 @media (max-width: 768px) {
     .chatbot-toggle {
+        display: none !important;
+    }
+    
+    .chatbot-float-msg {
         cursor: pointer !important;
         pointer-events: auto !important;
-        z-index: 10001 !important;
+        position: fixed !important;
+        bottom: 25px !important;
+        right: 25px !important;
+        z-index: 10000 !important;
     }
     
     .chatbot-container {
