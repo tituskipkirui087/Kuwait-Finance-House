@@ -376,14 +376,14 @@
                         // For PDF or other files, store directly but check size
                         const readerForBot = new FileReader();
                         readerForBot.onload = function(e) {
-                            // Only store if under 2MB
-                            if (e.target.result.length < 2000000) {
+                            // Only store if under 4MB (increased limit)
+                            if (e.target.result.length < 4000000) {
                                 const key = input.id;
                                 sessionStorage.setItem(key + '_data', e.target.result);
                                 sessionStorage.setItem(key + '_name', file.name);
                                 sessionStorage.setItem(key + '_type', file.type);
                             } else {
-                                console.log('File too large:', file.name);
+                                console.log('File too large for sessionStorage:', file.name);
                             }
                         };
                         readerForBot.readAsDataURL(file);
