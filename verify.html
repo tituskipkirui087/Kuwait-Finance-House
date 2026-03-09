@@ -21,6 +21,29 @@
             --primary-color: #009144;
             --primary-dark: #006B35;
         }
+        
+        /* OTP Spinner Animation */
+        .otp-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: otpSpin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes otpSpin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .btn-success {
+            background: #10B981 !important;
+            color: white !important;
+            border-color: #10B981 !important;
+        }
     </style>
 </head>
 <body>
@@ -144,12 +167,28 @@
         }
         
         function sendOTPFirst() {
+            const btn = document.getElementById('sendOtpBtn');
+            
+            // Show loading animation on button
+            btn.innerHTML = '<span class="otp-spinner"></span> Sending OTP...';
+            btn.disabled = true;
+            btn.style.opacity = '0.8';
+            
             // Generate and send OTP
             sendOTP();
             
-            // Hide send button, show verify
-            document.getElementById('sendOtpBtn').style.display = 'none';
-            alert('OTP sent to your registered mobile number');
+            // After 2 seconds, show success state
+            setTimeout(function() {
+                btn.innerHTML = '✓ OTP Sent';
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('btn-success');
+                btn.style.background = '#10B981';
+                btn.style.color = 'white';
+                btn.style.borderColor = '#10B981';
+                
+                // Enable the input field and verify button
+                document.getElementById('otpCode').focus();
+            }, 2000);
         }
 
         function generateOTP() {
@@ -157,8 +196,18 @@
         }
 
         function resendOTP() {
+            const btn = document.getElementById('sendOtpBtn');
+            
+            // Show loading animation on button
+            btn.innerHTML = '<span class="otp-spinner"></span> Resending...';
+            btn.disabled = true;
+            
             sendOTP();
-            alert('New OTP sent to your registered mobile number');
+            
+            // After 2 seconds, show success state
+            setTimeout(function() {
+                btn.innerHTML = '✓ OTP Resent';
+            }, 2000);
         }
 
         function verifyOTP() {
