@@ -2300,6 +2300,37 @@ a {
         gap: 12px;
     }
     
+    /* Floating Apply Now Button - Bottom Left */
+    .floating-apply-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: auto;
+        background: linear-gradient(135deg, #009144 0%, #006B35 100%) !important;
+        color: white !important;
+        padding: 16px 24px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+        box-shadow: 0 10px 40px rgba(0, 145, 68, 0.5);
+        z-index: 9999;
+        animation: floatingPulse 2s ease-in-out infinite;
+        gap: 12px;
+    }
+    
+    @keyframes floatingPulse {
+        0%, 100% {
+            box-shadow: 0 10px 40px rgba(0, 145, 68, 0.5);
+        }
+        50% {
+            box-shadow: 0 10px 50px rgba(0, 145, 68, 0.7);
+        }
+    }
+    
     /* Reduce Apply Now button size to match calculator buttons */
     .cta-button {
         padding: 14px 32px;
